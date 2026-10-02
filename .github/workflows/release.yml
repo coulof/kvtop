@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+
+      - name: Build multi-platform binaries and archives
+        run: |
+          VERSION="${GITHUB_REF_NAME:-v0.1.0}"
+          GIT_COMMIT=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
+          BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          PKG="main"
+          LDFLAGS="-s -w -X ${PKG}.Version=${VERSION} -X ${PKG}.GitCommit=${GIT_COMMIT} -X ${PKG}.BuildDate=${BUILD_DATE}"
+
+          mkdir -p dist
+
+          PLATFORMS=(
+            "linux/amd64/kvtop"
+            "linux/arm64/kvtop"
+            "darwin/amd64/kvtop"
+            "darwin/arm64/kvtop"
+            "windows/amd64/kvtop.exe"
+          )
+
+          for item in "${PLATFORMS[@]}"; do
+            IFS="/" read -r OS ARCH BIN <<< "$item"
+            TARGET_DIR="dist/${OS}_${ARCH}"
+            mkdir -p "${TARGET_DIR}"
+
+            echo "Compiling for ${OS}/${ARCH}..."
+            CGO_ENABLED=0 GOOS="${OS}" GOARCH="${ARCH}" go build -ldflags "${LDFLAGS}" -o "${TARGET_DIR}/${BIN}" ./cmd/kvtop
+
+            cp LICENSE README.md "${TARGET_DIR}/"
+
+            if [ "${OS}" = "windows" ]; then
+              ARCHIVE_NAME="kvtop_${VERSION}_${OS}_${ARCH}.zip"
+              (cd "${TARGET_DIR}" && zip -r "../../dist/${ARCHIVE_NAME}" .)
+            else
+              ARCHIVE_NAME="kvtop_${VERSION}_${OS}_${ARCH}.tar.gz"
+              tar -czvf "dist/${ARCHIVE_NAME}" -C "${TARGET_DIR}" .
+            fi
+
+            rm -rf "${TARGET_DIR}"
+          done
+
+          cd dist
+          sha256sum kvtop_* > checksums.txt
+          cat checksums.txt
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: dist/*
+          generate_release_notes: true
+          draft: false
+          prerelease: false

@@ -1,0 +1,1795 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "kubevirt.io/v1",
+            "kind": "VirtualMachineInstance",
+            "metadata": {
+                "annotations": {
+                    "kubevirt.io/latest-observed-api-version": "v1",
+                    "kubevirt.io/pci-topology-version": "v3",
+                    "kubevirt.io/storage-observed-api-version": "v1",
+                    "kubevirt.io/vm-generation": "1"
+                },
+                "creationTimestamp": "2026-09-21T16:04:07Z",
+                "finalizers": [
+                    "kubevirt.io/virtualMachineControllerFinalize",
+                    "kubevirt.io/foregroundDeleteVirtualMachine",
+                    "wrangler.cattle.io/VMController.BackfillObservedNetworkMacAddress",
+                    "wrangler.cattle.io/harvester-lb-vmi-controller"
+                ],
+                "generation": 9,
+                "labels": {
+                    "harvesterhci.io/vmName": "coriolis-win-minion",
+                    "kubevirt.io/nodeName": "hv-04"
+                },
+                "name": "coriolis-win-minion",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "kubevirt.io/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "VirtualMachine",
+                        "name": "coriolis-win-minion",
+                        "uid": "799f389a-b08f-40f9-9a42-6830b3c8ac3b"
+                    }
+                ],
+                "resourceVersion": "26033971",
+                "uid": "141908cc-d2e8-4d04-9e92-10ada033e592"
+            },
+            "spec": {
+                "affinity": {
+                    "nodeAffinity": {
+                        "requiredDuringSchedulingIgnoredDuringExecution": {
+                            "nodeSelectorTerms": [
+                                {
+                                    "matchExpressions": [
+                                        {
+                                            "key": "network.harvesterhci.io/mgmt",
+                                            "operator": "In",
+                                            "values": [
+                                                "true"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                "architecture": "amd64",
+                "domain": {
+                    "clock": {
+                        "timer": {
+                            "hpet": {
+                                "present": false
+                            },
+                            "hyperv": {
+                                "present": true
+                            },
+                            "pit": {
+                                "present": true,
+                                "tickPolicy": "delay"
+                            },
+                            "rtc": {
+                                "present": true,
+                                "tickPolicy": "catchup"
+                            }
+                        },
+                        "utc": {}
+                    },
+                    "cpu": {
+                        "cores": 4,
+                        "maxSockets": 1,
+                        "model": "host-model",
+                        "sockets": 1,
+                        "threads": 1
+                    },
+                    "devices": {
+                        "disks": [
+                            {
+                                "bootOrder": 1,
+                                "cdrom": {
+                                    "bus": "sata",
+                                    "readonly": true,
+                                    "tray": "closed"
+                                },
+                                "name": "cdrom-disk"
+                            },
+                            {
+                                "bootOrder": 2,
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "rootdisk"
+                            },
+                            {
+                                "cdrom": {
+                                    "bus": "sata",
+                                    "readonly": true,
+                                    "tray": "closed"
+                                },
+                                "name": "virtio-container-disk"
+                            },
+                            {
+                                "cdrom": {
+                                    "bus": "sata",
+                                    "readonly": true,
+                                    "tray": "closed"
+                                },
+                                "name": "sysprep"
+                            }
+                        ],
+                        "inputs": [
+                            {
+                                "bus": "usb",
+                                "name": "tablet",
+                                "type": "tablet"
+                            }
+                        ],
+                        "interfaces": [
+                            {
+                                "bridge": {},
+                                "macAddress": "66:a6:d0:bf:2b:4a",
+                                "model": "e1000",
+                                "name": "default"
+                            }
+                        ],
+                        "tpm": {}
+                    },
+                    "features": {
+                        "acpi": {
+                            "enabled": true
+                        },
+                        "apic": {
+                            "enabled": true
+                        },
+                        "hyperv": {
+                            "ipi": {
+                                "enabled": true
+                            },
+                            "relaxed": {
+                                "enabled": true
+                            },
+                            "reset": {
+                                "enabled": true
+                            },
+                            "runtime": {
+                                "enabled": true
+                            },
+                            "spinlocks": {
+                                "enabled": true,
+                                "spinlocks": 8191
+                            },
+                            "synic": {
+                                "enabled": true
+                            },
+                            "synictimer": {
+                                "direct": {
+                                    "enabled": true
+                                },
+                                "enabled": true
+                            },
+                            "vapic": {
+                                "enabled": true
+                            },
+                            "vpindex": {
+                                "enabled": true
+                            }
+                        },
+                        "smm": {
+                            "enabled": true
+                        }
+                    },
+                    "firmware": {
+                        "bootloader": {
+                            "efi": {
+                                "secureBoot": true
+                            }
+                        },
+                        "serial": "f9c9e207-b71a-42ec-8dd4-1ccbd968541c",
+                        "uuid": "92f03887-8c2a-454d-9f10-a228dfc14042"
+                    },
+                    "machine": {
+                        "type": "q35"
+                    },
+                    "memory": {
+                        "guest": "7936Mi",
+                        "maxGuest": "31Gi"
+                    },
+                    "resources": {
+                        "limits": {
+                            "cpu": "4",
+                            "memory": "8Gi"
+                        },
+                        "requests": {
+                            "cpu": "400m",
+                            "memory": "5461Mi"
+                        }
+                    }
+                },
+                "evictionStrategy": "LiveMigrateIfPossible",
+                "networks": [
+                    {
+                        "multus": {
+                            "networkName": "default/default"
+                        },
+                        "name": "default"
+                    }
+                ],
+                "terminationGracePeriodSeconds": 120,
+                "volumes": [
+                    {
+                        "name": "cdrom-disk",
+                        "persistentVolumeClaim": {
+                            "claimName": "coriolis-win-minion-cdrom"
+                        }
+                    },
+                    {
+                        "name": "rootdisk",
+                        "persistentVolumeClaim": {
+                            "claimName": "coriolis-win-minion-rootdisk"
+                        }
+                    },
+                    {
+                        "containerDisk": {
+                            "image": "registry.suse.com/suse/vmdp/vmdp:2.5.5",
+                            "imagePullPolicy": "IfNotPresent"
+                        },
+                        "name": "virtio-container-disk"
+                    },
+                    {
+                        "name": "sysprep",
+                        "sysprep": {
+                            "secret": {
+                                "name": "coriolis-win-sysprep"
+                            }
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "activePods": {
+                    "807a54a9-74a0-4b92-a3bb-d84a60d75637": "hv-04"
+                },
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-09-21T16:04:22Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "LiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "StorageLiveMigratable"
+                    }
+                ],
+                "currentCPUTopology": {
+                    "cores": 4,
+                    "sockets": 1,
+                    "threads": 1
+                },
+                "guestOSInfo": {},
+                "interfaces": [
+                    {
+                        "infoSource": "domain, multus-status",
+                        "linkState": "up",
+                        "mac": "66:a6:d0:bf:2b:4a",
+                        "name": "default",
+                        "podInterfaceName": "pod37a8eec1ce1",
+                        "queueCount": 1
+                    }
+                ],
+                "launcherContainerImageVersion": "registry.suse.com/suse/sles/16.0/virt-launcher:1.8.4-9.1",
+                "machine": {
+                    "type": "pc-q35-10.0"
+                },
+                "memory": {
+                    "guestAtBoot": "7936Mi",
+                    "guestCurrent": "7936Mi",
+                    "guestRequested": "7936Mi"
+                },
+                "migrationMethod": "LiveMigration",
+                "migrationTransport": "Unix",
+                "nodeName": "hv-04",
+                "phase": "Running",
+                "phaseTransitionTimestamps": [
+                    {
+                        "phase": "Pending",
+                        "phaseTransitionTimestamp": "2026-09-21T16:04:07Z"
+                    },
+                    {
+                        "phase": "Scheduling",
+                        "phaseTransitionTimestamp": "2026-09-21T16:04:07Z"
+                    },
+                    {
+                        "phase": "Scheduled",
+                        "phaseTransitionTimestamp": "2026-09-21T16:04:22Z"
+                    },
+                    {
+                        "phase": "Running",
+                        "phaseTransitionTimestamp": "2026-09-21T16:04:25Z"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "runtimeUser": 107,
+                "selinuxContext": "system_u:object_r:unlabeled_t:s0",
+                "virtualMachineRevisionName": "revision-start-vm-799f389a-b08f-40f9-9a42-6830b3c8ac3b-1",
+                "volumeStatus": [
+                    {
+                        "name": "cdrom-disk",
+                        "persistentVolumeClaimInfo": {
+                            "accessModes": [
+                                "ReadWriteMany"
+                            ],
+                            "capacity": {
+                                "storage": "20Gi"
+                            },
+                            "claimName": "coriolis-win-minion-cdrom",
+                            "filesystemOverhead": "0",
+                            "requests": {
+                                "storage": "20Gi"
+                            },
+                            "volumeMode": "Block"
+                        },
+                        "target": "sda"
+                    },
+                    {
+                        "name": "rootdisk",
+                        "persistentVolumeClaimInfo": {
+                            "accessModes": [
+                                "ReadWriteMany"
+                            ],
+                            "capacity": {
+                                "storage": "64Gi"
+                            },
+                            "claimName": "coriolis-win-minion-rootdisk",
+                            "filesystemOverhead": "0",
+                            "requests": {
+                                "storage": "64Gi"
+                            },
+                            "volumeMode": "Block"
+                        },
+                        "target": "vda"
+                    },
+                    {
+                        "name": "sysprep",
+                        "size": 1048576,
+                        "target": "sdc"
+                    },
+                    {
+                        "containerDiskVolume": {
+                            "checksum": 2301892970
+                        },
+                        "name": "virtio-container-disk",
+                        "target": "sdb"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kubevirt.io/v1",
+            "kind": "VirtualMachineInstance",
+            "metadata": {
+                "annotations": {
+                    "kubevirt.io/latest-observed-api-version": "v1",
+                    "kubevirt.io/pci-topology-version": "v3",
+                    "kubevirt.io/storage-observed-api-version": "v1",
+                    "kubevirt.io/vm-generation": "2",
+                    "vm.kubevirt.io/os": "linux"
+                },
+                "creationTimestamp": "2026-09-24T11:51:09Z",
+                "finalizers": [
+                    "kubevirt.io/virtualMachineControllerFinalize",
+                    "kubevirt.io/foregroundDeleteVirtualMachine",
+                    "wrangler.cattle.io/VMController.BackfillObservedNetworkMacAddress",
+                    "wrangler.cattle.io/harvester-lb-vmi-controller"
+                ],
+                "generation": 12,
+                "labels": {
+                    "harvesterhci.io/vmName": "spike-it",
+                    "kubevirt.io/nodeName": "hv-01"
+                },
+                "name": "spike-it",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "kubevirt.io/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "VirtualMachine",
+                        "name": "spike-it",
+                        "uid": "857cf058-a819-4340-bd2a-f3d8d60de988"
+                    }
+                ],
+                "resourceVersion": "29514886",
+                "uid": "1dd82e12-e72d-4adf-b010-357088144fba"
+            },
+            "spec": {
+                "affinity": {
+                    "nodeAffinity": {
+                        "requiredDuringSchedulingIgnoredDuringExecution": {
+                            "nodeSelectorTerms": [
+                                {
+                                    "matchExpressions": [
+                                        {
+                                            "key": "network.harvesterhci.io/mgmt",
+                                            "operator": "In",
+                                            "values": [
+                                                "true"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                "architecture": "amd64",
+                "domain": {
+                    "cpu": {
+                        "cores": 1,
+                        "maxSockets": 2,
+                        "model": "host-model",
+                        "sockets": 2,
+                        "threads": 1
+                    },
+                    "devices": {
+                        "disks": [
+                            {
+                                "bootOrder": 1,
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "disk-0"
+                            },
+                            {
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "cloudinitdisk"
+                            }
+                        ],
+                        "inputs": [
+                            {
+                                "bus": "usb",
+                                "name": "tablet",
+                                "type": "tablet"
+                            }
+                        ],
+                        "interfaces": [
+                            {
+                                "bridge": {},
+                                "macAddress": "ae:24:2a:cc:e7:c6",
+                                "model": "virtio",
+                                "name": "default"
+                            }
+                        ],
+                        "rng": {}
+                    },
+                    "features": {
+                        "acpi": {
+                            "enabled": true
+                        }
+                    },
+                    "firmware": {
+                        "bootloader": {
+                            "efi": {
+                                "secureBoot": false
+                            }
+                        },
+                        "serial": "6e17f56b-ddbc-4a70-bbd5-c1aeb868f2ea",
+                        "uuid": "657f7ae8-887d-4441-b241-9f0fd3be1cd8"
+                    },
+                    "machine": {
+                        "type": "q35"
+                    },
+                    "memory": {
+                        "guest": "8Gi",
+                        "maxGuest": "32Gi"
+                    },
+                    "resources": {
+                        "limits": {
+                            "cpu": "2",
+                            "memory": "8Gi"
+                        },
+                        "requests": {
+                            "cpu": "200m",
+                            "memory": "5461Mi"
+                        }
+                    }
+                },
+                "evictionStrategy": "LiveMigrateIfPossible",
+                "hostname": "spike-it",
+                "networks": [
+                    {
+                        "multus": {
+                            "networkName": "default/default"
+                        },
+                        "name": "default"
+                    }
+                ],
+                "terminationGracePeriodSeconds": 120,
+                "volumes": [
+                    {
+                        "name": "disk-0",
+                        "persistentVolumeClaim": {
+                            "claimName": "spike-it-disk-0"
+                        }
+                    },
+                    {
+                        "cloudInitNoCloud": {
+                            "userData": "#cloud-config\npassword: spike\nchpasswd: { expire: false }\nssh_pwauth: true\n"
+                        },
+                        "name": "cloudinitdisk"
+                    }
+                ]
+            },
+            "status": {
+                "activePods": {
+                    "fe3c7b32-e3ad-4c4b-a725-930a058bbcb9": "hv-01"
+                },
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-09-24T11:51:21Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "LiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "StorageLiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": "2026-09-24T11:51:44Z",
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "AgentConnected"
+                    }
+                ],
+                "currentCPUTopology": {
+                    "cores": 1,
+                    "sockets": 2,
+                    "threads": 1
+                },
+                "guestOSInfo": {
+                    "id": "sles",
+                    "kernelRelease": "6.12.0-160000.36-default",
+                    "kernelVersion": "#1 SMP PREEMPT_DYNAMIC Tue Jul 14 08:31:14 UTC 2026 (352acd0)",
+                    "machine": "x86_64",
+                    "name": "SLES",
+                    "prettyName": "SUSE Linux Enterprise Server 16.0",
+                    "version": "16.0",
+                    "versionId": "16.0"
+                },
+                "interfaces": [
+                    {
+                        "infoSource": "domain, guest-agent, multus-status",
+                        "interfaceName": "enp1s0",
+                        "ipAddress": "10.144.97.201",
+                        "ipAddresses": [
+                            "10.144.97.201",
+                            "fe80::ac24:2aff:fecc:e7c6"
+                        ],
+                        "linkState": "up",
+                        "mac": "ae:24:2a:cc:e7:c6",
+                        "name": "default",
+                        "podInterfaceName": "pod37a8eec1ce1",
+                        "queueCount": 1
+                    }
+                ],
+                "launcherContainerImageVersion": "registry.suse.com/suse/sles/16.0/virt-launcher:1.8.4-9.1",
+                "machine": {
+                    "type": "pc-q35-10.0"
+                },
+                "memory": {
+                    "guestAtBoot": "8Gi",
+                    "guestCurrent": "8Gi",
+                    "guestRequested": "8Gi"
+                },
+                "migrationMethod": "BlockMigration",
+                "migrationTransport": "Unix",
+                "nodeName": "hv-01",
+                "phase": "Running",
+                "phaseTransitionTimestamps": [
+                    {
+                        "phase": "Pending",
+                        "phaseTransitionTimestamp": "2026-09-24T11:51:09Z"
+                    },
+                    {
+                        "phase": "Scheduling",
+                        "phaseTransitionTimestamp": "2026-09-24T11:51:09Z"
+                    },
+                    {
+                        "phase": "Scheduled",
+                        "phaseTransitionTimestamp": "2026-09-24T11:51:21Z"
+                    },
+                    {
+                        "phase": "Running",
+                        "phaseTransitionTimestamp": "2026-09-24T11:51:25Z"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "runtimeUser": 107,
+                "selinuxContext": "system_u:object_r:unlabeled_t:s0",
+                "virtualMachineRevisionName": "revision-start-vm-857cf058-a819-4340-bd2a-f3d8d60de988-2",
+                "volumeStatus": [
+                    {
+                        "name": "cloudinitdisk",
+                        "size": 1048576,
+                        "target": "vdb"
+                    },
+                    {
+                        "name": "disk-0",
+                        "persistentVolumeClaimInfo": {
+                            "accessModes": [
+                                "ReadWriteMany"
+                            ],
+                            "capacity": {
+                                "storage": "10Gi"
+                            },
+                            "claimName": "spike-it-disk-0",
+                            "filesystemOverhead": "0",
+                            "requests": {
+                                "storage": "10Gi"
+                            },
+                            "volumeMode": "Block"
+                        },
+                        "target": "vda"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kubevirt.io/v1",
+            "kind": "VirtualMachineInstance",
+            "metadata": {
+                "annotations": {
+                    "kubevirt.io/latest-observed-api-version": "v1",
+                    "kubevirt.io/pci-topology-version": "v3",
+                    "kubevirt.io/storage-observed-api-version": "v1",
+                    "kubevirt.io/vm-generation": "1",
+                    "vm.kubevirt.io/os": "linux"
+                },
+                "creationTimestamp": "2026-09-24T12:56:11Z",
+                "finalizers": [
+                    "kubevirt.io/virtualMachineControllerFinalize",
+                    "kubevirt.io/foregroundDeleteVirtualMachine",
+                    "wrangler.cattle.io/harvester-lb-vmi-controller",
+                    "wrangler.cattle.io/VMController.BackfillObservedNetworkMacAddress"
+                ],
+                "generation": 13,
+                "labels": {
+                    "harvesterhci.io/vmName": "test2",
+                    "kubevirt.io/nodeName": "hv-04"
+                },
+                "name": "test2",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "kubevirt.io/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "VirtualMachine",
+                        "name": "test2",
+                        "uid": "06d1dd3d-822c-44ad-a776-a9dd46e5e6c8"
+                    }
+                ],
+                "resourceVersion": "29572632",
+                "uid": "4122c869-f7f7-4d70-a3fc-73f2631b77de"
+            },
+            "spec": {
+                "affinity": {
+                    "nodeAffinity": {
+                        "requiredDuringSchedulingIgnoredDuringExecution": {
+                            "nodeSelectorTerms": [
+                                {
+                                    "matchExpressions": [
+                                        {
+                                            "key": "network.harvesterhci.io/mgmt",
+                                            "operator": "In",
+                                            "values": [
+                                                "true"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                "architecture": "amd64",
+                "domain": {
+                    "cpu": {
+                        "cores": 1,
+                        "maxSockets": 1,
+                        "model": "host-model",
+                        "sockets": 1,
+                        "threads": 1
+                    },
+                    "devices": {
+                        "disks": [
+                            {
+                                "bootOrder": 1,
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "disk-0"
+                            },
+                            {
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "cloudinitdisk"
+                            }
+                        ],
+                        "inputs": [
+                            {
+                                "bus": "usb",
+                                "name": "tablet",
+                                "type": "tablet"
+                            }
+                        ],
+                        "interfaces": [
+                            {
+                                "bridge": {},
+                                "macAddress": "ae:ee:36:bb:81:d6",
+                                "model": "virtio",
+                                "name": "default"
+                            }
+                        ],
+                        "rng": {}
+                    },
+                    "features": {
+                        "acpi": {
+                            "enabled": true
+                        }
+                    },
+                    "firmware": {
+                        "serial": "e44b311b-6551-4c42-b91f-68a189f1094c",
+                        "uuid": "9097e151-7aa9-4186-8540-dac2ee366989"
+                    },
+                    "machine": {
+                        "type": "q35"
+                    },
+                    "memory": {
+                        "guest": "4Gi",
+                        "maxGuest": "16Gi"
+                    },
+                    "resources": {
+                        "limits": {
+                            "cpu": "1",
+                            "memory": "4Gi"
+                        },
+                        "requests": {
+                            "cpu": "100m",
+                            "memory": "2730Mi"
+                        }
+                    }
+                },
+                "evictionStrategy": "LiveMigrateIfPossible",
+                "hostname": "test2",
+                "networks": [
+                    {
+                        "multus": {
+                            "networkName": "default/default"
+                        },
+                        "name": "default"
+                    }
+                ],
+                "terminationGracePeriodSeconds": 120,
+                "volumes": [
+                    {
+                        "name": "disk-0",
+                        "persistentVolumeClaim": {
+                            "claimName": "test2-disk-0-re4jh"
+                        }
+                    },
+                    {
+                        "cloudInitNoCloud": {
+                            "userData": "#cloud-config\npassword: \"toto\"\nchpasswd: { expire: false }\nssh_pwauth: true\n"
+                        },
+                        "name": "cloudinitdisk"
+                    }
+                ]
+            },
+            "status": {
+                "activePods": {
+                    "6cf641f4-ef93-445d-913d-0bdc3b7f45aa": "hv-04"
+                },
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-09-24T12:56:40Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "LiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "StorageLiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": "2026-09-24T12:57:22Z",
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "AgentConnected"
+                    }
+                ],
+                "currentCPUTopology": {
+                    "cores": 1,
+                    "sockets": 1,
+                    "threads": 1
+                },
+                "guestOSInfo": {
+                    "id": "sles",
+                    "kernelRelease": "6.12.0-160000.36-default",
+                    "kernelVersion": "#1 SMP PREEMPT_DYNAMIC Tue Jul 14 08:31:14 UTC 2026 (352acd0)",
+                    "machine": "x86_64",
+                    "name": "SLES",
+                    "prettyName": "SUSE Linux Enterprise Server 16.0",
+                    "version": "16.0",
+                    "versionId": "16.0"
+                },
+                "interfaces": [
+                    {
+                        "infoSource": "domain, guest-agent, multus-status",
+                        "interfaceName": "enp1s0",
+                        "ipAddress": "10.144.103.77",
+                        "ipAddresses": [
+                            "10.144.103.77",
+                            "fe80::acee:36ff:febb:81d6"
+                        ],
+                        "linkState": "up",
+                        "mac": "ae:ee:36:bb:81:d6",
+                        "name": "default",
+                        "podInterfaceName": "pod37a8eec1ce1",
+                        "queueCount": 1
+                    }
+                ],
+                "launcherContainerImageVersion": "registry.suse.com/suse/sles/16.0/virt-launcher:1.8.4-9.1",
+                "machine": {
+                    "type": "pc-q35-10.0"
+                },
+                "memory": {
+                    "guestAtBoot": "4Gi",
+                    "guestCurrent": "4Gi",
+                    "guestRequested": "4Gi"
+                },
+                "migrationMethod": "BlockMigration",
+                "migrationTransport": "Unix",
+                "nodeName": "hv-04",
+                "phase": "Running",
+                "phaseTransitionTimestamps": [
+                    {
+                        "phase": "Pending",
+                        "phaseTransitionTimestamp": "2026-09-24T12:56:11Z"
+                    },
+                    {
+                        "phase": "Scheduling",
+                        "phaseTransitionTimestamp": "2026-09-24T12:56:12Z"
+                    },
+                    {
+                        "phase": "Scheduled",
+                        "phaseTransitionTimestamp": "2026-09-24T12:56:40Z"
+                    },
+                    {
+                        "phase": "Running",
+                        "phaseTransitionTimestamp": "2026-09-24T12:56:42Z"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "runtimeUser": 107,
+                "selinuxContext": "system_u:object_r:unlabeled_t:s0",
+                "virtualMachineRevisionName": "revision-start-vm-06d1dd3d-822c-44ad-a776-a9dd46e5e6c8-1",
+                "volumeStatus": [
+                    {
+                        "name": "cloudinitdisk",
+                        "size": 1048576,
+                        "target": "vdb"
+                    },
+                    {
+                        "name": "disk-0",
+                        "persistentVolumeClaimInfo": {
+                            "accessModes": [
+                                "ReadWriteMany"
+                            ],
+                            "capacity": {
+                                "storage": "10Gi"
+                            },
+                            "claimName": "test2-disk-0-re4jh",
+                            "filesystemOverhead": "0",
+                            "requests": {
+                                "storage": "10Gi"
+                            },
+                            "volumeMode": "Block"
+                        },
+                        "target": "vda"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kubevirt.io/v1",
+            "kind": "VirtualMachineInstance",
+            "metadata": {
+                "annotations": {
+                    "kubevirt.io/latest-observed-api-version": "v1",
+                    "kubevirt.io/pci-topology-version": "v3",
+                    "kubevirt.io/storage-observed-api-version": "v1",
+                    "kubevirt.io/vm-generation": "1",
+                    "vm.kubevirt.io/os": "linux"
+                },
+                "creationTimestamp": "2026-09-30T13:11:06Z",
+                "finalizers": [
+                    "kubevirt.io/virtualMachineControllerFinalize",
+                    "kubevirt.io/foregroundDeleteVirtualMachine",
+                    "wrangler.cattle.io/harvester-lb-vmi-controller",
+                    "wrangler.cattle.io/VMController.BackfillObservedNetworkMacAddress"
+                ],
+                "generation": 13,
+                "labels": {
+                    "harvesterhci.io/vmName": "tumbleweed-flint-florian",
+                    "kubevirt.io/nodeName": "hv-03"
+                },
+                "name": "tumbleweed-flint-florian",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "kubevirt.io/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "VirtualMachine",
+                        "name": "tumbleweed-flint-florian",
+                        "uid": "bb680983-3249-4c1f-bc38-5d66fd153648"
+                    }
+                ],
+                "resourceVersion": "37049028",
+                "uid": "b2bae5aa-6ba1-4c40-9a6b-75f8ba3a2b7e"
+            },
+            "spec": {
+                "affinity": {
+                    "nodeAffinity": {
+                        "requiredDuringSchedulingIgnoredDuringExecution": {
+                            "nodeSelectorTerms": [
+                                {
+                                    "matchExpressions": [
+                                        {
+                                            "key": "network.harvesterhci.io/mgmt",
+                                            "operator": "In",
+                                            "values": [
+                                                "true"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                "architecture": "amd64",
+                "domain": {
+                    "cpu": {
+                        "cores": 1,
+                        "maxSockets": 1,
+                        "model": "host-model",
+                        "sockets": 1,
+                        "threads": 1
+                    },
+                    "devices": {
+                        "disks": [
+                            {
+                                "bootOrder": 1,
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "disk-0"
+                            },
+                            {
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "cloudinitdisk"
+                            }
+                        ],
+                        "inputs": [
+                            {
+                                "bus": "usb",
+                                "name": "tablet",
+                                "type": "tablet"
+                            }
+                        ],
+                        "interfaces": [
+                            {
+                                "bridge": {},
+                                "macAddress": "56:57:0f:bd:a5:4e",
+                                "model": "virtio",
+                                "name": "default"
+                            }
+                        ],
+                        "rng": {}
+                    },
+                    "features": {
+                        "acpi": {
+                            "enabled": true
+                        }
+                    },
+                    "firmware": {
+                        "serial": "045096aa-5d23-4717-9c99-54e64fe00a37",
+                        "uuid": "e938d02f-4c76-47a1-a3fb-8c1780daca49"
+                    },
+                    "machine": {
+                        "type": "q35"
+                    },
+                    "memory": {
+                        "guest": "4Gi",
+                        "maxGuest": "16Gi"
+                    },
+                    "resources": {
+                        "limits": {
+                            "cpu": "1",
+                            "memory": "4Gi"
+                        },
+                        "requests": {
+                            "cpu": "100m",
+                            "memory": "2730Mi"
+                        }
+                    }
+                },
+                "evictionStrategy": "LiveMigrateIfPossible",
+                "hostname": "tumbleweed-flint-florian",
+                "networks": [
+                    {
+                        "multus": {
+                            "networkName": "default/default"
+                        },
+                        "name": "default"
+                    }
+                ],
+                "terminationGracePeriodSeconds": 120,
+                "volumes": [
+                    {
+                        "name": "disk-0",
+                        "persistentVolumeClaim": {
+                            "claimName": "tumbleweed-flint-florian-disk-0-8c4oy"
+                        }
+                    },
+                    {
+                        "cloudInitNoCloud": {
+                            "userData": "#cloud-config\npassword: \"foobar\"\nchpasswd: { expire: false }\nssh_pwauth: true\nssh_authorized_keys:\n  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFUsj1JqgJPNJJMpWD7En3y7d3jnctUAjY2PkvN1zPi6 baua_@DESKTOP-S32APPK\n"
+                        },
+                        "name": "cloudinitdisk"
+                    }
+                ]
+            },
+            "status": {
+                "activePods": {
+                    "5825ba9c-61a7-488a-a1f6-9b4e5588f38a": "hv-03"
+                },
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-09-30T13:11:33Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "LiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "StorageLiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": "2026-09-30T13:12:18Z",
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "AgentConnected"
+                    }
+                ],
+                "currentCPUTopology": {
+                    "cores": 1,
+                    "sockets": 1,
+                    "threads": 1
+                },
+                "guestOSInfo": {
+                    "id": "opensuse-tumbleweed",
+                    "kernelRelease": "7.2.6-1-default",
+                    "kernelVersion": "#1 SMP PREEMPT_DYNAMIC Tue Sep 15 06:50:07 UTC 2026 (3d19f11)",
+                    "machine": "x86_64",
+                    "name": "openSUSE Tumbleweed",
+                    "prettyName": "openSUSE Tumbleweed",
+                    "versionId": "20260922"
+                },
+                "interfaces": [
+                    {
+                        "infoSource": "domain, guest-agent, multus-status",
+                        "interfaceName": "enp1s0",
+                        "ipAddress": "10.144.103.10",
+                        "ipAddresses": [
+                            "10.144.103.10",
+                            "fe80::5457:fff:febd:a54e"
+                        ],
+                        "linkState": "up",
+                        "mac": "56:57:0f:bd:a5:4e",
+                        "name": "default",
+                        "podInterfaceName": "pod37a8eec1ce1",
+                        "queueCount": 1
+                    }
+                ],
+                "launcherContainerImageVersion": "registry.suse.com/suse/sles/16.0/virt-launcher:1.8.4-9.1",
+                "machine": {
+                    "type": "pc-q35-10.0"
+                },
+                "memory": {
+                    "guestAtBoot": "4Gi",
+                    "guestCurrent": "4Gi",
+                    "guestRequested": "4Gi"
+                },
+                "migrationMethod": "BlockMigration",
+                "migrationTransport": "Unix",
+                "nodeName": "hv-03",
+                "phase": "Running",
+                "phaseTransitionTimestamps": [
+                    {
+                        "phase": "Pending",
+                        "phaseTransitionTimestamp": "2026-09-30T13:11:06Z"
+                    },
+                    {
+                        "phase": "Scheduling",
+                        "phaseTransitionTimestamp": "2026-09-30T13:11:06Z"
+                    },
+                    {
+                        "phase": "Scheduled",
+                        "phaseTransitionTimestamp": "2026-09-30T13:11:33Z"
+                    },
+                    {
+                        "phase": "Running",
+                        "phaseTransitionTimestamp": "2026-09-30T13:11:36Z"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "runtimeUser": 107,
+                "selinuxContext": "system_u:object_r:unlabeled_t:s0",
+                "virtualMachineRevisionName": "revision-start-vm-bb680983-3249-4c1f-bc38-5d66fd153648-1",
+                "volumeStatus": [
+                    {
+                        "name": "cloudinitdisk",
+                        "size": 1048576,
+                        "target": "vdb"
+                    },
+                    {
+                        "name": "disk-0",
+                        "persistentVolumeClaimInfo": {
+                            "accessModes": [
+                                "ReadWriteMany"
+                            ],
+                            "capacity": {
+                                "storage": "30Gi"
+                            },
+                            "claimName": "tumbleweed-flint-florian-disk-0-8c4oy",
+                            "filesystemOverhead": "0",
+                            "requests": {
+                                "storage": "30Gi"
+                            },
+                            "volumeMode": "Block"
+                        },
+                        "target": "vda"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kubevirt.io/v1",
+            "kind": "VirtualMachineInstance",
+            "metadata": {
+                "annotations": {
+                    "kubevirt.io/latest-observed-api-version": "v1",
+                    "kubevirt.io/pci-topology-version": "v3",
+                    "kubevirt.io/storage-observed-api-version": "v1",
+                    "kubevirt.io/vm-generation": "1",
+                    "vm.kubevirt.io/os": "linux"
+                },
+                "creationTimestamp": "2026-10-01T07:42:30Z",
+                "finalizers": [
+                    "kubevirt.io/virtualMachineControllerFinalize",
+                    "kubevirt.io/foregroundDeleteVirtualMachine",
+                    "wrangler.cattle.io/harvester-lb-vmi-controller",
+                    "wrangler.cattle.io/VMController.BackfillObservedNetworkMacAddress"
+                ],
+                "generation": 10,
+                "labels": {
+                    "harvesterhci.io/vmName": "ubuntu-ridge-wyi",
+                    "kubevirt.io/nodeName": "hv-02"
+                },
+                "name": "ubuntu-ridge-wyi",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "kubevirt.io/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "VirtualMachine",
+                        "name": "ubuntu-ridge-wyi",
+                        "uid": "588a3ea6-68db-46fd-9d92-7777a1ee0207"
+                    }
+                ],
+                "resourceVersion": "38005655",
+                "uid": "1d7267be-ba28-48a2-a2d7-4377d193e452"
+            },
+            "spec": {
+                "affinity": {},
+                "architecture": "amd64",
+                "domain": {
+                    "cpu": {
+                        "cores": 1,
+                        "maxSockets": 1,
+                        "model": "host-model",
+                        "sockets": 1,
+                        "threads": 1
+                    },
+                    "devices": {
+                        "disks": [
+                            {
+                                "bootOrder": 1,
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "disk-0"
+                            },
+                            {
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "cloudinitdisk"
+                            }
+                        ],
+                        "inputs": [
+                            {
+                                "bus": "usb",
+                                "name": "tablet",
+                                "type": "tablet"
+                            }
+                        ],
+                        "interfaces": [
+                            {
+                                "macAddress": "ca:a5:28:f4:bc:21",
+                                "masquerade": {},
+                                "model": "virtio",
+                                "name": "default"
+                            }
+                        ],
+                        "rng": {}
+                    },
+                    "features": {
+                        "acpi": {
+                            "enabled": true
+                        }
+                    },
+                    "firmware": {
+                        "serial": "ffb68c3c-f903-4ebc-ba37-83225eb31ff7",
+                        "uuid": "fa1859d2-4cf6-49e9-914a-a58c1f47ae07"
+                    },
+                    "machine": {
+                        "type": "q35"
+                    },
+                    "memory": {
+                        "guest": "4Gi",
+                        "maxGuest": "16Gi"
+                    },
+                    "resources": {
+                        "limits": {
+                            "cpu": "1",
+                            "memory": "4Gi"
+                        },
+                        "requests": {
+                            "cpu": "100m",
+                            "memory": "2730Mi"
+                        }
+                    }
+                },
+                "evictionStrategy": "LiveMigrateIfPossible",
+                "hostname": "ubuntu-ridge-wyi",
+                "networks": [
+                    {
+                        "name": "default",
+                        "pod": {}
+                    }
+                ],
+                "terminationGracePeriodSeconds": 120,
+                "volumes": [
+                    {
+                        "name": "disk-0",
+                        "persistentVolumeClaim": {
+                            "claimName": "ubuntu-ridge-wyi-disk-0-csrm9"
+                        }
+                    },
+                    {
+                        "cloudInitNoCloud": {
+                            "userData": "#cloud-config\npassword: \"foobar\"\nchpasswd: { expire: false }\nssh_pwauth: true\n"
+                        },
+                        "name": "cloudinitdisk"
+                    }
+                ]
+            },
+            "status": {
+                "activePods": {
+                    "f3fd56fc-2256-49f2-acf8-221a037e1f3a": "hv-02"
+                },
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-01T07:43:15Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "LiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "StorageLiveMigratable"
+                    }
+                ],
+                "currentCPUTopology": {
+                    "cores": 1,
+                    "sockets": 1,
+                    "threads": 1
+                },
+                "guestOSInfo": {},
+                "interfaces": [
+                    {
+                        "infoSource": "domain",
+                        "ipAddress": "10.52.1.92",
+                        "ipAddresses": [
+                            "10.52.1.92"
+                        ],
+                        "linkState": "up",
+                        "mac": "ca:a5:28:f4:bc:21",
+                        "name": "default",
+                        "podInterfaceName": "eth0",
+                        "queueCount": 1
+                    }
+                ],
+                "launcherContainerImageVersion": "registry.suse.com/suse/sles/16.0/virt-launcher:1.8.4-9.1",
+                "machine": {
+                    "type": "pc-q35-10.0"
+                },
+                "memory": {
+                    "guestAtBoot": "4Gi",
+                    "guestCurrent": "4Gi",
+                    "guestRequested": "4Gi"
+                },
+                "migrationMethod": "BlockMigration",
+                "migrationTransport": "Unix",
+                "nodeName": "hv-02",
+                "phase": "Running",
+                "phaseTransitionTimestamps": [
+                    {
+                        "phase": "Pending",
+                        "phaseTransitionTimestamp": "2026-10-01T07:42:30Z"
+                    },
+                    {
+                        "phase": "Scheduling",
+                        "phaseTransitionTimestamp": "2026-10-01T07:42:30Z"
+                    },
+                    {
+                        "phase": "Scheduled",
+                        "phaseTransitionTimestamp": "2026-10-01T07:43:15Z"
+                    },
+                    {
+                        "phase": "Running",
+                        "phaseTransitionTimestamp": "2026-10-01T07:43:18Z"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "runtimeUser": 107,
+                "selinuxContext": "system_u:object_r:unlabeled_t:s0",
+                "virtualMachineRevisionName": "revision-start-vm-588a3ea6-68db-46fd-9d92-7777a1ee0207-1",
+                "volumeStatus": [
+                    {
+                        "name": "cloudinitdisk",
+                        "size": 1048576,
+                        "target": "vdb"
+                    },
+                    {
+                        "name": "disk-0",
+                        "persistentVolumeClaimInfo": {
+                            "accessModes": [
+                                "ReadWriteMany"
+                            ],
+                            "capacity": {
+                                "storage": "30Gi"
+                            },
+                            "claimName": "ubuntu-ridge-wyi-disk-0-csrm9",
+                            "filesystemOverhead": "0",
+                            "requests": {
+                                "storage": "30Gi"
+                            },
+                            "volumeMode": "Block"
+                        },
+                        "target": "vda"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kubevirt.io/v1",
+            "kind": "VirtualMachineInstance",
+            "metadata": {
+                "annotations": {
+                    "kubevirt.io/latest-observed-api-version": "v1",
+                    "kubevirt.io/pci-topology-version": "v3",
+                    "kubevirt.io/storage-observed-api-version": "v1",
+                    "kubevirt.io/vm-generation": "1",
+                    "vm.kubevirt.io/os": "windows"
+                },
+                "creationTimestamp": "2026-09-25T09:47:07Z",
+                "finalizers": [
+                    "kubevirt.io/virtualMachineControllerFinalize",
+                    "kubevirt.io/foregroundDeleteVirtualMachine",
+                    "wrangler.cattle.io/harvester-lb-vmi-controller",
+                    "wrangler.cattle.io/VMController.BackfillObservedNetworkMacAddress"
+                ],
+                "generation": 12,
+                "labels": {
+                    "harvesterhci.io/vmName": "win2k25-kestrel-50i",
+                    "kubevirt.io/nodeName": "hv-04"
+                },
+                "name": "win2k25-kestrel-50i",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "kubevirt.io/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "VirtualMachine",
+                        "name": "win2k25-kestrel-50i",
+                        "uid": "10277964-0f11-467d-8066-6d8e60587f93"
+                    }
+                ],
+                "resourceVersion": "30664962",
+                "uid": "d32a449c-31b8-4e73-87f7-5c63d1ef9060"
+            },
+            "spec": {
+                "affinity": {},
+                "architecture": "amd64",
+                "domain": {
+                    "clock": {
+                        "timer": {
+                            "hpet": {
+                                "present": false
+                            },
+                            "hyperv": {
+                                "present": true
+                            },
+                            "pit": {
+                                "present": true,
+                                "tickPolicy": "delay"
+                            },
+                            "rtc": {
+                                "present": true,
+                                "tickPolicy": "catchup"
+                            }
+                        },
+                        "utc": {}
+                    },
+                    "cpu": {
+                        "cores": 1,
+                        "maxSockets": 1,
+                        "model": "host-model",
+                        "sockets": 1,
+                        "threads": 1
+                    },
+                    "devices": {
+                        "autoattachInputDevice": true,
+                        "disks": [
+                            {
+                                "bootOrder": 1,
+                                "disk": {
+                                    "bus": "sata"
+                                },
+                                "name": "disk-0"
+                            },
+                            {
+                                "disk": {
+                                    "bus": "sata"
+                                },
+                                "name": "cloudinitdisk"
+                            }
+                        ],
+                        "inputs": [
+                            {
+                                "bus": "usb",
+                                "name": "tablet",
+                                "type": "tablet"
+                            }
+                        ],
+                        "interfaces": [
+                            {
+                                "macAddress": "1a:e3:30:68:cf:40",
+                                "masquerade": {},
+                                "model": "e1000e",
+                                "name": "default"
+                            }
+                        ],
+                        "tpm": {
+                            "persistent": true
+                        }
+                    },
+                    "features": {
+                        "acpi": {
+                            "enabled": true
+                        },
+                        "apic": {
+                            "enabled": true
+                        },
+                        "hyperv": {
+                            "frequencies": {
+                                "enabled": true
+                            },
+                            "ipi": {
+                                "enabled": true
+                            },
+                            "reenlightenment": {
+                                "enabled": true
+                            },
+                            "relaxed": {
+                                "enabled": true
+                            },
+                            "reset": {
+                                "enabled": true
+                            },
+                            "runtime": {
+                                "enabled": true
+                            },
+                            "spinlocks": {
+                                "enabled": true,
+                                "spinlocks": 8191
+                            },
+                            "synic": {
+                                "enabled": true
+                            },
+                            "synictimer": {
+                                "direct": {
+                                    "enabled": true
+                                },
+                                "enabled": true
+                            },
+                            "tlbflush": {
+                                "enabled": true
+                            },
+                            "vapic": {
+                                "enabled": true
+                            },
+                            "vpindex": {
+                                "enabled": true
+                            }
+                        },
+                        "smm": {
+                            "enabled": true
+                        }
+                    },
+                    "firmware": {
+                        "bootloader": {
+                            "efi": {
+                                "persistent": true,
+                                "secureBoot": true
+                            }
+                        },
+                        "serial": "0736ef85-ff7b-4474-80e4-6b6e1b9c13ec",
+                        "uuid": "d7b27091-2a5c-4baf-be44-2a9acb2e64a0"
+                    },
+                    "machine": {
+                        "type": "q35"
+                    },
+                    "memory": {
+                        "guest": "4Gi",
+                        "maxGuest": "16Gi"
+                    },
+                    "resources": {
+                        "limits": {
+                            "cpu": "1",
+                            "memory": "4Gi"
+                        },
+                        "requests": {
+                            "cpu": "100m",
+                            "memory": "2730Mi"
+                        }
+                    }
+                },
+                "evictionStrategy": "LiveMigrateIfPossible",
+                "hostname": "win2k25-kestrel-50i",
+                "networks": [
+                    {
+                        "name": "default",
+                        "pod": {}
+                    }
+                ],
+                "terminationGracePeriodSeconds": 120,
+                "volumes": [
+                    {
+                        "name": "disk-0",
+                        "persistentVolumeClaim": {
+                            "claimName": "win2k25-kestrel-50i-disk-0-css1u"
+                        }
+                    },
+                    {
+                        "cloudInitNoCloud": {
+                            "userData": "#cloud-config\n"
+                        },
+                        "name": "cloudinitdisk"
+                    }
+                ]
+            },
+            "status": {
+                "activePods": {
+                    "cea83ca2-0340-4cfe-89ab-050128677396": "hv-04"
+                },
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-09-25T09:55:43Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "message": "All of the VMI's DVs are bound and ready",
+                        "reason": "AllDVsReady",
+                        "status": "True",
+                        "type": "DataVolumesReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "message": "HyperV Reenlightenment VMIs cannot migrate when TSC Frequency is not exposed on the cluster: guest timers might be inconsistent",
+                        "reason": "NoTSCFrequencyNotLiveMigratable",
+                        "status": "False",
+                        "type": "LiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "message": "NoTSCFrequencyNotLiveMigratable: HyperV Reenlightenment VMIs cannot migrate when TSC Frequency is not exposed on the cluster: guest timers might be inconsistent",
+                        "reason": "NotMigratable",
+                        "status": "False",
+                        "type": "StorageLiveMigratable"
+                    }
+                ],
+                "currentCPUTopology": {
+                    "cores": 1,
+                    "sockets": 1,
+                    "threads": 1
+                },
+                "guestOSInfo": {},
+                "interfaces": [
+                    {
+                        "infoSource": "domain",
+                        "ipAddress": "10.52.3.106",
+                        "ipAddresses": [
+                            "10.52.3.106"
+                        ],
+                        "linkState": "up",
+                        "mac": "1a:e3:30:68:cf:40",
+                        "name": "default",
+                        "podInterfaceName": "eth0",
+                        "queueCount": 1
+                    }
+                ],
+                "launcherContainerImageVersion": "registry.suse.com/suse/sles/16.0/virt-launcher:1.8.4-9.1",
+                "machine": {
+                    "type": "pc-q35-10.0"
+                },
+                "memory": {
+                    "guestAtBoot": "4Gi",
+                    "guestCurrent": "4Gi",
+                    "guestRequested": "4Gi"
+                },
+                "migrationMethod": "BlockMigration",
+                "migrationTransport": "Unix",
+                "nodeName": "hv-04",
+                "phase": "Running",
+                "phaseTransitionTimestamps": [
+                    {
+                        "phase": "Pending",
+                        "phaseTransitionTimestamp": "2026-09-25T09:47:07Z"
+                    },
+                    {
+                        "phase": "Scheduling",
+                        "phaseTransitionTimestamp": "2026-09-25T09:47:21Z"
+                    },
+                    {
+                        "phase": "Scheduled",
+                        "phaseTransitionTimestamp": "2026-09-25T09:55:43Z"
+                    },
+                    {
+                        "phase": "Running",
+                        "phaseTransitionTimestamp": "2026-09-25T09:55:50Z"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "runtimeUser": 107,
+                "selinuxContext": "system_u:object_r:unlabeled_t:s0",
+                "topologyHints": {
+                    "tscFrequency": 0
+                },
+                "virtualMachineRevisionName": "revision-start-vm-10277964-0f11-467d-8066-6d8e60587f93-1",
+                "volumeStatus": [
+                    {
+                        "name": "cloudinitdisk",
+                        "size": 1048576,
+                        "target": "sdb"
+                    },
+                    {
+                        "name": "disk-0",
+                        "persistentVolumeClaimInfo": {
+                            "accessModes": [
+                                "ReadWriteMany"
+                            ],
+                            "capacity": {
+                                "storage": "36Gi"
+                            },
+                            "claimName": "win2k25-kestrel-50i-disk-0-css1u",
+                            "filesystemOverhead": "0",
+                            "requests": {
+                                "storage": "38654705664"
+                            },
+                            "volumeMode": "Block"
+                        },
+                        "target": "sda"
+                    },
+                    {
+                        "name": "persistent-state-for-this-vm",
+                        "persistentVolumeClaimInfo": {
+                            "accessModes": [
+                                "ReadWriteMany"
+                            ],
+                            "claimName": "persistent-state-for-win2k25-kestrel-50i-kf92k"
+                        },
+                        "target": ""
+                    }
+                ]
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

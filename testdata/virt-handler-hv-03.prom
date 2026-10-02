@@ -1,0 +1,943 @@
+# HELP go_gc_duration_seconds A summary of the wall-time pause (stop-the-world) duration in garbage collection cycles.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile="0"} 4.4181e-05
+go_gc_duration_seconds{quantile="0.25"} 5.099e-05
+go_gc_duration_seconds{quantile="0.5"} 5.9371e-05
+go_gc_duration_seconds{quantile="0.75"} 7.9821e-05
+go_gc_duration_seconds{quantile="1"} 0.002353137
+go_gc_duration_seconds_sum 0.65476642
+go_gc_duration_seconds_count 7703
+# HELP go_gc_gogc_percent Heap size target percentage configured by the user, otherwise 100. This value is set by the GOGC environment variable, and the runtime/debug.SetGCPercent function. Sourced from /gc/gogc:percent.
+# TYPE go_gc_gogc_percent gauge
+go_gc_gogc_percent 100
+# HELP go_gc_gomemlimit_bytes Go runtime memory limit configured by the user, otherwise math.MaxInt64. This value is set by the GOMEMLIMIT environment variable, and the runtime/debug.SetMemoryLimit function. Sourced from /gc/gomemlimit:bytes.
+# TYPE go_gc_gomemlimit_bytes gauge
+go_gc_gomemlimit_bytes 9.223372036854776e+18
+# HELP go_goroutines Number of goroutines that currently exist.
+# TYPE go_goroutines gauge
+go_goroutines 214
+# HELP go_info Information about the Go environment.
+# TYPE go_info gauge
+go_info{version="go1.26.6-X:nodwarf5"} 1
+# HELP go_memstats_alloc_bytes Number of bytes allocated in heap and currently in use. Equals to /memory/classes/heap/objects:bytes.
+# TYPE go_memstats_alloc_bytes gauge
+go_memstats_alloc_bytes 6.4368768e+07
+# HELP go_memstats_alloc_bytes_total Total number of bytes allocated in heap until now, even if released already. Equals to /gc/heap/allocs:bytes.
+# TYPE go_memstats_alloc_bytes_total counter
+go_memstats_alloc_bytes_total 1.7218476808e+10
+# HELP go_memstats_buck_hash_sys_bytes Number of bytes used by the profiling bucket hash table. Equals to /memory/classes/profiling/buckets:bytes.
+# TYPE go_memstats_buck_hash_sys_bytes gauge
+go_memstats_buck_hash_sys_bytes 2.216008e+06
+# HELP go_memstats_frees_total Total number of heap objects frees. Equals to /gc/heap/frees:objects + /gc/heap/tiny/allocs:objects.
+# TYPE go_memstats_frees_total counter
+go_memstats_frees_total 1.44661936e+08
+# HELP go_memstats_gc_sys_bytes Number of bytes used for garbage collection system metadata. Equals to /memory/classes/metadata/other:bytes.
+# TYPE go_memstats_gc_sys_bytes gauge
+go_memstats_gc_sys_bytes 4.843792e+06
+# HELP go_memstats_heap_alloc_bytes Number of heap bytes allocated and currently in use, same as go_memstats_alloc_bytes. Equals to /memory/classes/heap/objects:bytes.
+# TYPE go_memstats_heap_alloc_bytes gauge
+go_memstats_heap_alloc_bytes 6.4368768e+07
+# HELP go_memstats_heap_idle_bytes Number of heap bytes waiting to be used. Equals to /memory/classes/heap/released:bytes + /memory/classes/heap/free:bytes.
+# TYPE go_memstats_heap_idle_bytes gauge
+go_memstats_heap_idle_bytes 4.8939008e+07
+# HELP go_memstats_heap_inuse_bytes Number of heap bytes that are in use. Equals to /memory/classes/heap/objects:bytes + /memory/classes/heap/unused:bytes
+# TYPE go_memstats_heap_inuse_bytes gauge
+go_memstats_heap_inuse_bytes 8.15104e+07
+# HELP go_memstats_heap_objects Number of currently allocated objects. Equals to /gc/heap/objects:objects.
+# TYPE go_memstats_heap_objects gauge
+go_memstats_heap_objects 382516
+# HELP go_memstats_heap_released_bytes Number of heap bytes released to OS. Equals to /memory/classes/heap/released:bytes.
+# TYPE go_memstats_heap_released_bytes gauge
+go_memstats_heap_released_bytes 4.2934272e+07
+# HELP go_memstats_heap_sys_bytes Number of heap bytes obtained from system. Equals to /memory/classes/heap/objects:bytes + /memory/classes/heap/unused:bytes + /memory/classes/heap/released:bytes + /memory/classes/heap/free:bytes.
+# TYPE go_memstats_heap_sys_bytes gauge
+go_memstats_heap_sys_bytes 1.30449408e+08
+# HELP go_memstats_last_gc_time_seconds Number of seconds since 1970 of last garbage collection.
+# TYPE go_memstats_last_gc_time_seconds gauge
+go_memstats_last_gc_time_seconds 1.790926529639318e+09
+# HELP go_memstats_mallocs_total Total number of heap objects allocated, both live and gc-ed. Semantically a counter version for go_memstats_heap_objects gauge. Equals to /gc/heap/allocs:objects + /gc/heap/tiny/allocs:objects.
+# TYPE go_memstats_mallocs_total counter
+go_memstats_mallocs_total 1.45044452e+08
+# HELP go_memstats_mcache_inuse_bytes Number of bytes in use by mcache structures. Equals to /memory/classes/metadata/mcache/inuse:bytes.
+# TYPE go_memstats_mcache_inuse_bytes gauge
+go_memstats_mcache_inuse_bytes 4592
+# HELP go_memstats_mcache_sys_bytes Number of bytes used for mcache structures obtained from system. Equals to /memory/classes/metadata/mcache/inuse:bytes + /memory/classes/metadata/mcache/free:bytes.
+# TYPE go_memstats_mcache_sys_bytes gauge
+go_memstats_mcache_sys_bytes 16072
+# HELP go_memstats_mspan_inuse_bytes Number of bytes in use by mspan structures. Equals to /memory/classes/metadata/mspan/inuse:bytes.
+# TYPE go_memstats_mspan_inuse_bytes gauge
+go_memstats_mspan_inuse_bytes 1.53344e+06
+# HELP go_memstats_mspan_sys_bytes Number of bytes used for mspan structures obtained from system. Equals to /memory/classes/metadata/mspan/inuse:bytes + /memory/classes/metadata/mspan/free:bytes.
+# TYPE go_memstats_mspan_sys_bytes gauge
+go_memstats_mspan_sys_bytes 1.5504e+06
+# HELP go_memstats_next_gc_bytes Number of heap bytes when next garbage collection will take place. Equals to /gc/heap/goal:bytes.
+# TYPE go_memstats_next_gc_bytes gauge
+go_memstats_next_gc_bytes 1.27247546e+08
+# HELP go_memstats_other_sys_bytes Number of bytes used for other system allocations. Equals to /memory/classes/other:bytes.
+# TYPE go_memstats_other_sys_bytes gauge
+go_memstats_other_sys_bytes 825544
+# HELP go_memstats_stack_inuse_bytes Number of bytes obtained from system for stack allocator in non-CGO environments. Equals to /memory/classes/heap/stacks:bytes.
+# TYPE go_memstats_stack_inuse_bytes gauge
+go_memstats_stack_inuse_bytes 3.76832e+06
+# HELP go_memstats_stack_sys_bytes Number of bytes obtained from system for stack allocator. Equals to /memory/classes/heap/stacks:bytes + /memory/classes/os-stacks:bytes.
+# TYPE go_memstats_stack_sys_bytes gauge
+go_memstats_stack_sys_bytes 3.76832e+06
+# HELP go_memstats_sys_bytes Number of bytes obtained from system. Equals to /memory/classes/total:byte.
+# TYPE go_memstats_sys_bytes gauge
+go_memstats_sys_bytes 1.43669544e+08
+# HELP go_sched_gomaxprocs_threads The current runtime.GOMAXPROCS setting, or the number of operating system threads that can execute user-level Go code simultaneously. Sourced from /sched/gomaxprocs:threads.
+# TYPE go_sched_gomaxprocs_threads gauge
+go_sched_gomaxprocs_threads 2
+# HELP go_threads Number of OS threads created.
+# TYPE go_threads gauge
+go_threads 11
+# HELP kubevirt_info Version information.
+# TYPE kubevirt_info gauge
+kubevirt_info{goversion="go1.26.6-X:nodwarf5",kubeversion="v1.8.4"} 1
+# HELP kubevirt_node_deprecated_machine_types List of deprecated machine types based on the capabilities of individual nodes, as detected by virt-handler.
+# TYPE kubevirt_node_deprecated_machine_types gauge
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-2.10",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-2.11",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-2.12",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-2.4",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-2.5",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-2.6",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-2.7",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-2.8",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-2.9",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-3.0",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-3.1",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-4.0",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-4.1",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-4.2",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-5.0",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-5.1",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-5.2",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-6.0",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-6.1",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-6.2",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-i440fx-7.0",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-2.10",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-2.11",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-2.12",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-2.4",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-2.5",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-2.6",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-2.7",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-2.8",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-2.9",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-3.0",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-3.1",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-4.0",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-4.0.1",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-4.1",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-4.2",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-5.0",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-5.1",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-5.2",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-6.0",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-6.1",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-6.2",node="hv-03"} 1
+kubevirt_node_deprecated_machine_types{machine_type="pc-q35-7.0",node="hv-03"} 1
+# HELP kubevirt_rest_client_rate_limiter_duration_seconds Client side rate limiter latency in seconds. Broken down by verb and URL.
+# TYPE kubevirt_rest_client_rate_limiter_duration_seconds histogram
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.001"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.002"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.004"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.008"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.016"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.032"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.064"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.128"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.256"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.512"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="+Inf"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET"} 5.2e-07
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.001"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.002"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.004"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.008"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.016"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.032"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.064"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.128"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.256"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.512"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="+Inf"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE"} 5.8939999999999995e-05
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE"} 29
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.001"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.002"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.004"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.008"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.016"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.032"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.064"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.128"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.256"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.512"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="+Inf"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH"} 2.089e-05
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH"} 16
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.001"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.002"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.004"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.008"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.016"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.032"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.064"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.128"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.256"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.512"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="+Inf"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH"} 0.03828221499999989
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH"} 14860
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.001"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.002"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.004"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.008"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.016"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.032"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.064"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.128"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.256"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.512"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 7.8e-07
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.001"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.002"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.004"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.008"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.016"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.032"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.064"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.128"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.256"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.512"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 6.6e-07
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.001"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.002"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.004"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.008"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.016"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.032"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.064"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.128"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.256"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.512"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 2.38e-06
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.001"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.002"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.004"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.008"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.016"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.032"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.064"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.128"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.256"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.512"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 4.8e-07
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.001"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.002"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.004"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.008"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.016"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.032"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.064"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.128"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.256"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.512"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="+Inf"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE"} 0.00012308
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE"} 67
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.001"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.002"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.004"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.008"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.016"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.032"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.064"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.128"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.256"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.512"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 3.31e-06
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 2
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.001"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.002"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.004"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.008"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.016"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.032"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.064"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.128"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.256"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.512"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 7.8e-07
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.001"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.002"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.004"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.008"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.016"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.032"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.064"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.128"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.256"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.512"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="+Inf"} 1
+kubevirt_rest_client_rate_limiter_duration_seconds_sum{url="https://10.53.0.1:443/version",verb="none"} 2.11e-06
+kubevirt_rest_client_rate_limiter_duration_seconds_count{url="https://10.53.0.1:443/version",verb="none"} 1
+# HELP kubevirt_rest_client_request_latency_seconds Request latency in seconds. Broken down by verb and URL.
+# TYPE kubevirt_rest_client_request_latency_seconds histogram
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.005"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.025"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.05"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="0.8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="1.25"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="1.5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="3"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="10"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="15"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="20"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="30"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="45"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="60"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET",le="+Inf"} 1
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET"} 0.056386986
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/configmaps?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="GET"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.005"} 8
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.025"} 27
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.05"} 28
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.1"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.2"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.4"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.6"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="0.8"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="1"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="1.25"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="1.5"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="2"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="3"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="4"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="5"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="6"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="8"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="10"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="15"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="20"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="30"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="45"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="60"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE",le="+Inf"} 29
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE"} 0.27367942200000006
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events",verb="CREATE"} 29
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.005"} 3
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.025"} 13
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.05"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.1"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.2"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.4"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.6"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="0.8"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="1"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="1.25"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="1.5"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="2"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="3"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="4"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="5"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="6"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="8"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="10"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="15"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="20"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="30"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="45"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="60"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH",le="+Inf"} 16
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH"} 0.20814555599999998
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/api/v1/namespaces/%7Bnamespace%7D/events/%7Bname%7D",verb="PATCH"} 16
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.005"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.025"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.05"} 12818
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.1"} 14683
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.2"} 14794
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.4"} 14852
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.6"} 14856
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="0.8"} 14857
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="1"} 14857
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="1.25"} 14859
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="1.5"} 14859
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="2"} 14859
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="3"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="4"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="5"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="6"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="8"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="10"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="15"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="20"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="30"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="45"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="60"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH",le="+Inf"} 14860
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH"} 655.2004752100008
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/api/v1/nodes/%7Bname%7D",verb="PATCH"} 14860
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.005"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.025"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.05"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.1"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.2"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.25"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="3"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="10"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="15"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="20"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="30"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="45"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="60"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 1
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 0.215108544
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/api/v1/nodes?fieldSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.005"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.025"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.05"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.1"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.2"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.4"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.6"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.8"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.25"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.5"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="2"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="3"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="4"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="10"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="15"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="20"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="30"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="45"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="60"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 1
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 4.94558282
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/apis/apiextensions.k8s.io/v1/customresourcedefinitions?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.005"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.025"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.05"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.25"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="3"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="10"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="15"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="20"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="30"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="45"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="60"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 1
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 0.031755721
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/apis/backup.kubevirt.io/v1alpha1/virtualmachinebackuptrackers?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.005"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.025"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.05"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.25"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="3"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="10"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="15"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="20"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="30"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="45"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="60"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 1
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 0.066460078
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/apis/kubevirt.io/v1/kubevirts?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.005"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.025"} 43
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.05"} 64
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.1"} 66
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.2"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.4"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.6"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="0.8"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="1"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="1.25"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="1.5"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="2"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="3"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="4"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="5"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="6"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="8"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="10"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="15"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="20"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="30"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="45"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="60"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE",le="+Inf"} 67
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE"} 1.658560016
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/apis/kubevirt.io/v1/namespaces/%7Bnamespace%7D/virtualmachineinstances/%7Bname%7D",verb="UPDATE"} 67
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.005"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.025"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.05"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.1"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.2"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.4"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.6"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.8"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.25"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.5"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="2"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="3"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="4"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="5"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="6"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="8"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="10"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="15"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="20"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="30"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="45"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="60"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 2
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 0.063412003
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?labelSelector=%7Bvalue%7D&limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 2
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.005"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.025"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.05"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="0.8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.25"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="1.5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="3"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="10"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="15"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="20"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="30"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="45"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="60"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST",le="+Inf"} 1
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 0.030614531
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/apis/kubevirt.io/v1/virtualmachineinstances?limit=%7Bvalue%7D&resourceVersion=%7Bvalue%7D",verb="LIST"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.005"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.025"} 0
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.05"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="0.8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="1"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="1.25"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="1.5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="2"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="3"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="4"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="5"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="6"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="8"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="10"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="15"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="20"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="30"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="45"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="60"} 1
+kubevirt_rest_client_request_latency_seconds_bucket{url="https://10.53.0.1:443/version",verb="none",le="+Inf"} 1
+kubevirt_rest_client_request_latency_seconds_sum{url="https://10.53.0.1:443/version",verb="none"} 0.028119578
+kubevirt_rest_client_request_latency_seconds_count{url="https://10.53.0.1:443/version",verb="none"} 1
+# HELP kubevirt_rest_client_requests_total Number of HTTP requests, partitioned by status code, method, and host.
+# TYPE kubevirt_rest_client_requests_total counter
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="configmaps",verb="LIST"} 1
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="configmaps",verb="WATCH"} 2068
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="customresourcedefinitions",verb="LIST"} 1
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="customresourcedefinitions",verb="WATCH"} 2074
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="kubevirts",verb="LIST"} 1
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="kubevirts",verb="WATCH"} 2070
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="nodes",verb="LIST"} 1
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="nodes",verb="WATCH"} 2053
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="none",verb="none"} 1
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="virtualmachinebackuptrackers",verb="LIST"} 1
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="virtualmachinebackuptrackers",verb="WATCH"} 2045
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="virtualmachineinstances",verb="LIST"} 3
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="GET",resource="virtualmachineinstances",verb="WATCH"} 6191
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="PATCH",resource="events",verb="PATCH"} 16
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="PATCH",resource="nodes",verb="PATCH"} 14860
+kubevirt_rest_client_requests_total{code="200",host="10.53.0.1:443",method="PUT",resource="virtualmachineinstances",verb="UPDATE"} 60
+kubevirt_rest_client_requests_total{code="201",host="10.53.0.1:443",method="POST",resource="events",verb="CREATE"} 29
+kubevirt_rest_client_requests_total{code="409",host="10.53.0.1:443",method="PUT",resource="virtualmachineinstances",verb="UPDATE"} 7
+# HELP kubevirt_virt_handler_ready_status Indication for a virt-handler that is ready to serve requests.
+# TYPE kubevirt_virt_handler_ready_status gauge
+kubevirt_virt_handler_ready_status 1
+# HELP kubevirt_vmi_cpu_system_usage_seconds_total Total CPU time spent in system mode.
+# TYPE kubevirt_vmi_cpu_system_usage_seconds_total counter
+kubevirt_vmi_cpu_system_usage_seconds_total{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 3809.03
+# HELP kubevirt_vmi_cpu_usage_seconds_total Total CPU time spent in all modes (sum of both vcpu and hypervisor usage).
+# TYPE kubevirt_vmi_cpu_usage_seconds_total counter
+kubevirt_vmi_cpu_usage_seconds_total{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 8081.27
+# HELP kubevirt_vmi_cpu_user_usage_seconds_total Total CPU time spent in user mode.
+# TYPE kubevirt_vmi_cpu_user_usage_seconds_total counter
+kubevirt_vmi_cpu_user_usage_seconds_total{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 4272.24
+# HELP kubevirt_vmi_dirty_rate_bytes_per_second Guest dirty-rate in bytes per second.
+# TYPE kubevirt_vmi_dirty_rate_bytes_per_second gauge
+kubevirt_vmi_dirty_rate_bytes_per_second{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_vmi_filesystem_capacity_bytes Total VM filesystem capacity in bytes.
+# TYPE kubevirt_vmi_filesystem_capacity_bytes gauge
+kubevirt_vmi_filesystem_capacity_bytes{disk_name="vda2",file_system_type="vfat",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",mount_point="/boot/efi",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 5.36576e+08
+kubevirt_vmi_filesystem_capacity_bytes{disk_name="vda3",file_system_type="xfs",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",mount_point="/",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 3.1605108736e+10
+# HELP kubevirt_vmi_filesystem_used_bytes Used VM filesystem capacity in bytes.
+# TYPE kubevirt_vmi_filesystem_used_bytes gauge
+kubevirt_vmi_filesystem_used_bytes{disk_name="vda2",file_system_type="vfat",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",mount_point="/boot/efi",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 4.366336e+06
+kubevirt_vmi_filesystem_used_bytes{disk_name="vda3",file_system_type="xfs",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",mount_point="/",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 1.340837888e+09
+# HELP kubevirt_vmi_guest_load_15m Guest system load average over 15 minutes as reported by the guest agent. Load is defined as the number of processes in the runqueue or waiting for disk I/O. Requires qemu-guest-agent version 10.0.0 or above.
+# TYPE kubevirt_vmi_guest_load_15m gauge
+kubevirt_vmi_guest_load_15m{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_vmi_guest_load_1m Guest system load average over 1 minute as reported by the guest agent. Load is defined as the number of processes in the runqueue or waiting for disk I/O. Requires qemu-guest-agent version 10.0.0 or above.
+# TYPE kubevirt_vmi_guest_load_1m gauge
+kubevirt_vmi_guest_load_1m{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_vmi_guest_load_5m Guest system load average over 5 minutes as reported by the guest agent. Load is defined as the number of processes in the runqueue or waiting for disk I/O. Requires qemu-guest-agent version 10.0.0 or above.
+# TYPE kubevirt_vmi_guest_load_5m gauge
+kubevirt_vmi_guest_load_5m{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_vmi_memory_actual_balloon_bytes Current balloon size in bytes.
+# TYPE kubevirt_vmi_memory_actual_balloon_bytes gauge
+kubevirt_vmi_memory_actual_balloon_bytes{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 4.294967296e+09
+# HELP kubevirt_vmi_memory_available_bytes Amount of usable memory as seen by the domain. This value may not be accurate if a balloon driver is in use or if the guest OS does not initialize all assigned pages
+# TYPE kubevirt_vmi_memory_available_bytes gauge
+kubevirt_vmi_memory_available_bytes{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 4.104564736e+09
+# HELP kubevirt_vmi_memory_cached_bytes The amount of memory that is being used to cache I/O and is available to be reclaimed, corresponds to the sum of `Buffers` + `Cached` + `SwapCached` in `/proc/meminfo`.
+# TYPE kubevirt_vmi_memory_cached_bytes gauge
+kubevirt_vmi_memory_cached_bytes{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 2.97414656e+08
+# HELP kubevirt_vmi_memory_domain_bytes The amount of memory in bytes allocated to the domain. The `memory` value in domain xml file.
+# TYPE kubevirt_vmi_memory_domain_bytes gauge
+kubevirt_vmi_memory_domain_bytes{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 4.294967296e+09
+# HELP kubevirt_vmi_memory_pgmajfault_total The number of page faults when disk IO was required. Page faults occur when a process makes a valid access to virtual memory that is not available. When servicing the page fault, if disk IO is required, it is considered as major fault.
+# TYPE kubevirt_vmi_memory_pgmajfault_total counter
+kubevirt_vmi_memory_pgmajfault_total{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 360
+# HELP kubevirt_vmi_memory_pgminfault_total The number of other page faults, when disk IO was not required. Page faults occur when a process makes a valid access to virtual memory that is not available. When servicing the page fault, if disk IO is NOT required, it is considered as minor fault.
+# TYPE kubevirt_vmi_memory_pgminfault_total counter
+kubevirt_vmi_memory_pgminfault_total{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 498147
+# HELP kubevirt_vmi_memory_resident_bytes Resident set size of the process running the domain.
+# TYPE kubevirt_vmi_memory_resident_bytes gauge
+kubevirt_vmi_memory_resident_bytes{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 9.647104e+08
+# HELP kubevirt_vmi_memory_swap_in_traffic_bytes The total amount of data read from swap space of the guest in bytes.
+# TYPE kubevirt_vmi_memory_swap_in_traffic_bytes gauge
+kubevirt_vmi_memory_swap_in_traffic_bytes{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_vmi_memory_swap_out_traffic_bytes The total amount of memory written out to swap space of the guest in bytes.
+# TYPE kubevirt_vmi_memory_swap_out_traffic_bytes gauge
+kubevirt_vmi_memory_swap_out_traffic_bytes{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_vmi_memory_unused_bytes The amount of memory left completely unused by the system. Memory that is available but used for reclaimable caches should NOT be reported as free.
+# TYPE kubevirt_vmi_memory_unused_bytes gauge
+kubevirt_vmi_memory_unused_bytes{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 3.56263936e+09
+# HELP kubevirt_vmi_memory_usable_bytes The amount of memory which can be reclaimed by balloon without pushing the guest system to swap, corresponds to 'Available' in /proc/meminfo.
+# TYPE kubevirt_vmi_memory_usable_bytes gauge
+kubevirt_vmi_memory_usable_bytes{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 3.550318592e+09
+# HELP kubevirt_vmi_network_receive_bytes_total Total network traffic received in bytes.
+# TYPE kubevirt_vmi_network_receive_bytes_total counter
+kubevirt_vmi_network_receive_bytes_total{interface="default",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 6.106498e+07
+# HELP kubevirt_vmi_network_receive_errors_total Total network received error packets.
+# TYPE kubevirt_vmi_network_receive_errors_total counter
+kubevirt_vmi_network_receive_errors_total{interface="default",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_vmi_network_receive_packets_dropped_total The total number of rx packets dropped on vNIC interfaces.
+# TYPE kubevirt_vmi_network_receive_packets_dropped_total counter
+kubevirt_vmi_network_receive_packets_dropped_total{interface="default",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_vmi_network_receive_packets_total Total network traffic received packets.
+# TYPE kubevirt_vmi_network_receive_packets_total counter
+kubevirt_vmi_network_receive_packets_total{interface="default",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 1.023524e+06
+# HELP kubevirt_vmi_network_traffic_bytes_total [Deprecated] Total number of bytes sent and received.
+# TYPE kubevirt_vmi_network_traffic_bytes_total counter
+kubevirt_vmi_network_traffic_bytes_total{interface="default",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03",type="rx"} 6.106498e+07
+kubevirt_vmi_network_traffic_bytes_total{interface="default",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03",type="tx"} 790490
+# HELP kubevirt_vmi_network_transmit_bytes_total Total network traffic transmitted in bytes.
+# TYPE kubevirt_vmi_network_transmit_bytes_total counter
+kubevirt_vmi_network_transmit_bytes_total{interface="default",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 790490
+# HELP kubevirt_vmi_network_transmit_errors_total Total network transmitted error packets.
+# TYPE kubevirt_vmi_network_transmit_errors_total counter
+kubevirt_vmi_network_transmit_errors_total{interface="default",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_vmi_network_transmit_packets_dropped_total The total number of tx packets dropped on vNIC interfaces.
+# TYPE kubevirt_vmi_network_transmit_packets_dropped_total counter
+kubevirt_vmi_network_transmit_packets_dropped_total{interface="default",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_vmi_network_transmit_packets_total Total network traffic transmitted packets.
+# TYPE kubevirt_vmi_network_transmit_packets_total counter
+kubevirt_vmi_network_transmit_packets_total{interface="default",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 11300
+# HELP kubevirt_vmi_node_cpu_affinity Number of VMI CPU affinities to node physical cores.
+# TYPE kubevirt_vmi_node_cpu_affinity gauge
+kubevirt_vmi_node_cpu_affinity{kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 8
+# HELP kubevirt_vmi_storage_flush_requests_total Total storage flush requests.
+# TYPE kubevirt_vmi_storage_flush_requests_total counter
+kubevirt_vmi_storage_flush_requests_total{drive="cloudinitdisk",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+kubevirt_vmi_storage_flush_requests_total{drive="disk-0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 745
+# HELP kubevirt_vmi_storage_flush_times_seconds_total Total time spent on cache flushing.
+# TYPE kubevirt_vmi_storage_flush_times_seconds_total counter
+kubevirt_vmi_storage_flush_times_seconds_total{drive="cloudinitdisk",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+kubevirt_vmi_storage_flush_times_seconds_total{drive="disk-0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0.039799699
+# HELP kubevirt_vmi_storage_iops_read_total Total number of I/O read operations.
+# TYPE kubevirt_vmi_storage_iops_read_total counter
+kubevirt_vmi_storage_iops_read_total{drive="cloudinitdisk",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 51
+kubevirt_vmi_storage_iops_read_total{drive="disk-0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 10625
+# HELP kubevirt_vmi_storage_iops_write_total Total number of I/O write operations.
+# TYPE kubevirt_vmi_storage_iops_write_total counter
+kubevirt_vmi_storage_iops_write_total{drive="cloudinitdisk",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+kubevirt_vmi_storage_iops_write_total{drive="disk-0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 2592
+# HELP kubevirt_vmi_storage_read_times_seconds_total Total time spent on read operations.
+# TYPE kubevirt_vmi_storage_read_times_seconds_total counter
+kubevirt_vmi_storage_read_times_seconds_total{drive="cloudinitdisk",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0.05469856
+kubevirt_vmi_storage_read_times_seconds_total{drive="disk-0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 16.105788588
+# HELP kubevirt_vmi_storage_read_traffic_bytes_total Total number of bytes read from storage.
+# TYPE kubevirt_vmi_storage_read_traffic_bytes_total counter
+kubevirt_vmi_storage_read_traffic_bytes_total{drive="cloudinitdisk",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 1.456128e+06
+kubevirt_vmi_storage_read_traffic_bytes_total{drive="disk-0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 3.86777088e+08
+# HELP kubevirt_vmi_storage_write_times_seconds_total Total time spent on write operations.
+# TYPE kubevirt_vmi_storage_write_times_seconds_total counter
+kubevirt_vmi_storage_write_times_seconds_total{drive="cloudinitdisk",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+kubevirt_vmi_storage_write_times_seconds_total{drive="disk-0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 66.24346187
+# HELP kubevirt_vmi_storage_write_traffic_bytes_total Total number of written bytes.
+# TYPE kubevirt_vmi_storage_write_traffic_bytes_total counter
+kubevirt_vmi_storage_write_traffic_bytes_total{drive="cloudinitdisk",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+kubevirt_vmi_storage_write_traffic_bytes_total{drive="disk-0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 2.66979328e+08
+# HELP kubevirt_vmi_vcpu_delay_seconds_total Amount of time spent by each vcpu waiting in the queue instead of running.
+# TYPE kubevirt_vmi_vcpu_delay_seconds_total counter
+kubevirt_vmi_vcpu_delay_seconds_total{id="0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 26.764636953
+# HELP kubevirt_vmi_vcpu_seconds_total Total amount of time spent in each state by each vcpu (cpu_time excluding hypervisor time). Where `id` is the vcpu identifier and `state` can be one of the following: [`OFFLINE`, `RUNNING`, `BLOCKED`].
+# TYPE kubevirt_vmi_vcpu_seconds_total counter
+kubevirt_vmi_vcpu_seconds_total{id="0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03",state="running"} 459.09
+# HELP kubevirt_vmi_vcpu_wait_seconds_total Amount of time spent by each vcpu while waiting on I/O.
+# TYPE kubevirt_vmi_vcpu_wait_seconds_total counter
+kubevirt_vmi_vcpu_wait_seconds_total{id="0",kubernetes_vmi_label_harvesterhci_io_vmName="tumbleweed-flint-florian",kubernetes_vmi_label_kubevirt_io_nodeName="hv-03",name="tumbleweed-flint-florian",namespace="default",node="hv-03"} 0
+# HELP kubevirt_workqueue_adds_total Total number of adds handled by workqueue
+# TYPE kubevirt_workqueue_adds_total counter
+kubevirt_workqueue_adds_total{name="virt-handler-node-labeller"} 3288
+kubevirt_workqueue_adds_total{name="virt-handler-source"} 2017
+kubevirt_workqueue_adds_total{name="virt-handler-target"} 1886
+kubevirt_workqueue_adds_total{name="virt-handler-vm"} 1957
+# HELP kubevirt_workqueue_depth Current depth of workqueue
+# TYPE kubevirt_workqueue_depth gauge
+kubevirt_workqueue_depth{name="virt-handler-node-labeller"} 0
+kubevirt_workqueue_depth{name="virt-handler-source"} 0
+kubevirt_workqueue_depth{name="virt-handler-target"} 0
+kubevirt_workqueue_depth{name="virt-handler-vm"} 0
+# HELP kubevirt_workqueue_longest_running_processor_seconds How many seconds has the longest running processor for workqueue been running.
+# TYPE kubevirt_workqueue_longest_running_processor_seconds gauge
+kubevirt_workqueue_longest_running_processor_seconds{name="virt-handler-node-labeller"} 0
+kubevirt_workqueue_longest_running_processor_seconds{name="virt-handler-source"} 0
+kubevirt_workqueue_longest_running_processor_seconds{name="virt-handler-target"} 0
+kubevirt_workqueue_longest_running_processor_seconds{name="virt-handler-vm"} 0
+# HELP kubevirt_workqueue_queue_duration_seconds How long an item stays in workqueue before being requested.
+# TYPE kubevirt_workqueue_queue_duration_seconds histogram
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="1e-08"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="1e-07"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="1e-06"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="9.999999999999999e-06"} 518
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="9.999999999999999e-05"} 3262
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="0.001"} 3287
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="0.01"} 3288
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="0.1"} 3288
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="1"} 3288
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="10"} 3288
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-node-labeller",le="+Inf"} 3288
+kubevirt_workqueue_queue_duration_seconds_sum{name="virt-handler-node-labeller"} 0.04828712000000003
+kubevirt_workqueue_queue_duration_seconds_count{name="virt-handler-node-labeller"} 3288
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="1e-08"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="1e-07"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="1e-06"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="9.999999999999999e-06"} 1978
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="9.999999999999999e-05"} 2014
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="0.001"} 2017
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="0.01"} 2017
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="0.1"} 2017
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="1"} 2017
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="10"} 2017
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-source",le="+Inf"} 2017
+kubevirt_workqueue_queue_duration_seconds_sum{name="virt-handler-source"} 0.008151191999999977
+kubevirt_workqueue_queue_duration_seconds_count{name="virt-handler-source"} 2017
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="1e-08"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="1e-07"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="1e-06"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="9.999999999999999e-06"} 1872
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="9.999999999999999e-05"} 1885
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="0.001"} 1886
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="0.01"} 1886
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="0.1"} 1886
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="1"} 1886
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="10"} 1886
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-target",le="+Inf"} 1886
+kubevirt_workqueue_queue_duration_seconds_sum{name="virt-handler-target"} 0.003963214000000001
+kubevirt_workqueue_queue_duration_seconds_count{name="virt-handler-target"} 1886
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="1e-08"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="1e-07"} 0
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="1e-06"} 3
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="9.999999999999999e-06"} 1867
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="9.999999999999999e-05"} 1899
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="0.001"} 1905
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="0.01"} 1917
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="0.1"} 1943
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="1"} 1952
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="10"} 1957
+kubevirt_workqueue_queue_duration_seconds_bucket{name="virt-handler-vm",le="+Inf"} 1957
+kubevirt_workqueue_queue_duration_seconds_sum{name="virt-handler-vm"} 14.905517084000023
+kubevirt_workqueue_queue_duration_seconds_count{name="virt-handler-vm"} 1957
+# HELP kubevirt_workqueue_retries_total Total number of retries handled by workqueue
+# TYPE kubevirt_workqueue_retries_total counter
+kubevirt_workqueue_retries_total{name="virt-handler-node-labeller"} 7
+kubevirt_workqueue_retries_total{name="virt-handler-source"} 2
+kubevirt_workqueue_retries_total{name="virt-handler-target"} 0
+kubevirt_workqueue_retries_total{name="virt-handler-vm"} 47
+# HELP kubevirt_workqueue_unfinished_work_seconds How many seconds of work have been in progress without being observed by work_duration. Large values indicate stuck threads. The number of stuck threads can be deduced by observing the rate at which this value increases.
+# TYPE kubevirt_workqueue_unfinished_work_seconds gauge
+kubevirt_workqueue_unfinished_work_seconds{name="virt-handler-node-labeller"} 0
+kubevirt_workqueue_unfinished_work_seconds{name="virt-handler-source"} 0
+kubevirt_workqueue_unfinished_work_seconds{name="virt-handler-target"} 0
+kubevirt_workqueue_unfinished_work_seconds{name="virt-handler-vm"} 0
+# HELP kubevirt_workqueue_work_duration_seconds How long in seconds processing an item from workqueue takes.
+# TYPE kubevirt_workqueue_work_duration_seconds histogram
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="1e-08"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="1e-07"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="1e-06"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="9.999999999999999e-06"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="9.999999999999999e-05"} 7
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="0.001"} 3251
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="0.01"} 3286
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="0.1"} 3287
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="1"} 3287
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="10"} 3288
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-node-labeller",le="+Inf"} 3288
+kubevirt_workqueue_work_duration_seconds_sum{name="virt-handler-node-labeller"} 2.7951946199999984
+kubevirt_workqueue_work_duration_seconds_count{name="virt-handler-node-labeller"} 3288
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="1e-08"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="1e-07"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="1e-06"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="9.999999999999999e-06"} 99
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="9.999999999999999e-05"} 2000
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="0.001"} 2015
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="0.01"} 2016
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="0.1"} 2017
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="1"} 2017
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="10"} 2017
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-source",le="+Inf"} 2017
+kubevirt_workqueue_work_duration_seconds_sum{name="virt-handler-source"} 0.06168870499999997
+kubevirt_workqueue_work_duration_seconds_count{name="virt-handler-source"} 2017
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="1e-08"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="1e-07"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="1e-06"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="9.999999999999999e-06"} 1403
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="9.999999999999999e-05"} 1884
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="0.001"} 1886
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="0.01"} 1886
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="0.1"} 1886
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="1"} 1886
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="10"} 1886
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-target",le="+Inf"} 1886
+kubevirt_workqueue_work_duration_seconds_sum{name="virt-handler-target"} 0.018159093999999994
+kubevirt_workqueue_work_duration_seconds_count{name="virt-handler-target"} 1886
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="1e-08"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="1e-07"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="1e-06"} 0
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="9.999999999999999e-06"} 10
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="9.999999999999999e-05"} 24
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="0.001"} 32
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="0.01"} 397
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="0.1"} 1932
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="1"} 1943
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="10"} 1957
+kubevirt_workqueue_work_duration_seconds_bucket{name="virt-handler-vm",le="+Inf"} 1957
+kubevirt_workqueue_work_duration_seconds_sum{name="virt-handler-vm"} 50.16362943599997
+kubevirt_workqueue_work_duration_seconds_count{name="virt-handler-vm"} 1957
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 1070.49
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1.048576e+06
+# HELP process_network_receive_bytes_total Number of bytes received by the process over the network.
+# TYPE process_network_receive_bytes_total counter
+process_network_receive_bytes_total 2.132620034e+09
+# HELP process_network_transmit_bytes_total Number of bytes sent by the process over the network.
+# TYPE process_network_transmit_bytes_total counter
+process_network_transmit_bytes_total 1.051124464e+09
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 29
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 1.63700736e+08
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.79000092156e+09
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 2.18525696e+09
+# HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in bytes.
+# TYPE process_virtual_memory_max_bytes gauge
+process_virtual_memory_max_bytes 1.8446744073709552e+19
+# HELP promhttp_metric_handler_requests_in_flight Current number of scrapes being served.
+# TYPE promhttp_metric_handler_requests_in_flight gauge
+promhttp_metric_handler_requests_in_flight 1
+# HELP promhttp_metric_handler_requests_total Total number of scrapes by HTTP status code.
+# TYPE promhttp_metric_handler_requests_total counter
+promhttp_metric_handler_requests_total{code="200"} 1
+promhttp_metric_handler_requests_total{code="500"} 0
+promhttp_metric_handler_requests_total{code="503"} 0

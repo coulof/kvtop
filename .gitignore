@@ -1,0 +1,14 @@
+# Binaries
+bin/
+/kvtop
+/kubectl-kvtop
+
+# IDE and OS
+.DS_Store
+.idea/
+.vscode/
+
+# Build artifacts and temp
+*.out
+*.test
+/var/
