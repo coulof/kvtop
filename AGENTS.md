@@ -4,7 +4,7 @@
 
 `kvtop` (KubeVirt top): a btop-style terminal UI showing live CPU, memory, network and disk usage of VMs on a Harvester / SUSE Virtualization cluster.
 
-It has two frontends on one core: the TUI for humans (shipped in v0.1.0), and a JSON CLI / MCP server so an AI agent can query and diagnose VM performance (in progress).
+It has two frontends on one core: the TUI for humans (shipped in v0.1.0), and a JSON CLI / MCP server so an AI agent can query and diagnose VM performance (shipped in v0.2.0).
 
 Primary job: live troubleshooting. "Which VM is the noisy neighbour right now, on which node, in which namespace."
 
@@ -200,9 +200,14 @@ Do not add rules that need host-side data (CPU steal, PSI, host NIC saturation).
 8. **Diagnose** [Completed]: `internal/diagnose`, the initial rule set, `kvtop diagnose`.
 9. **MCP and record** [Completed]: `kvtop mcp`, `kvtop record`, `--anonymize`.
 10. **Prometheus backend**: history backfill and time-range queries.
-11. **Backlog / Future**: Longhorn panel, alerts panel, namespace multi-select picker (`N`), tree mode (`t`).
+11. **Agent expansion**:
+    - **MCP Resources & Prompts**: Expose URI-addressable cluster state (`kvtop://cluster/summary`, `kvtop://diagnose/findings`) and pre-packaged troubleshooting workflows (`troubleshoot-vm`, `noisy-neighbor-hunt`).
+    - **Deterministic Remediation Recipes**: Add actionable CLI commands (`virtctl migrate ...`) to diagnosis findings without violating read-only constraints.
+    - **Longhorn Storage Correlation**: Watch `longhorn.io/v1beta2` to correlate `disk_latency_high` with volume health and replica rebuilding states.
+    - **Hypervisor Contention**: Incorporate `virsh domstats` vCPU delay/wait and packet drop counters into diagnosis when `--allow-exec` is enabled.
+12. **Backlog / Future**: Longhorn TUI panel, alerts panel, namespace multi-select picker (`N`), tree mode (`t`).
 
-Milestones 1–6 shipped in **Release `v0.1.0`**. Stop after each remaining milestone and report before starting the next.
+Milestones 1–6 shipped in **Release `v0.1.0`**. Milestones 7–9 shipped in **Release `v0.2.0`**. Stop after each remaining milestone and report before starting the next.
 
 ## Validated spike results
 

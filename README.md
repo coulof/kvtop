@@ -52,16 +52,16 @@ Download pre-compiled archives for Linux, macOS, or Windows from [GitHub Release
 **macOS (Apple Silicon)**:
 
 ```bash
-curl -LO https://github.com/coulof/kvtop/releases/latest/download/kvtop_v0.1.0_darwin_arm64.tar.gz
-tar -xzf kvtop_v0.1.0_darwin_arm64.tar.gz
+curl -LO https://github.com/coulof/kvtop/releases/latest/download/kvtop_v0.2.0_darwin_arm64.tar.gz
+tar -xzf kvtop_v0.2.0_darwin_arm64.tar.gz
 sudo mv kvtop /usr/local/bin/
 ```
 
 **Linux (amd64)**:
 
 ```bash
-curl -LO https://github.com/coulof/kvtop/releases/latest/download/kvtop_v0.1.0_linux_amd64.tar.gz
-tar -xzf kvtop_v0.1.0_linux_amd64.tar.gz
+curl -LO https://github.com/coulof/kvtop/releases/latest/download/kvtop_v0.2.0_linux_amd64.tar.gz
+tar -xzf kvtop_v0.2.0_linux_amd64.tar.gz
 sudo mv kvtop /usr/local/bin/
 ```
 
