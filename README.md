@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>btop-style terminal UI for live troubleshooting of Virtual Machines on KubeVirt clusters.</strong>
+  <strong>Terminal monitor and Model Context Protocol (MCP) server for Virtual Machines on KubeVirt and Harvester clusters.</strong>
 </p>
 
 <p align="center">
@@ -13,9 +13,13 @@
 
 ---
 
-`kvtop` is a terminal UI for live troubleshooting of Virtual Machines on KubeVirt clusters. Works with Harvester, SUSE Virtualization, OpenShift Virtualization, and upstream KubeVirt.
+`kvtop` shows which VM is consuming CPU, memory, storage IOPS, and network bandwidth right now, on which host, and in which namespace.
 
-Built for live troubleshooting: see which VM is consuming resources right now, on which host, and in which namespace.
+It provides two frontends on a single shared core:
+- **Terminal UI**: Interactive btop-style dashboard with live 2D Braille charts, sparklines, and on-demand `virsh` drilldowns.
+- **Agent CLI & MCP Server**: Model Context Protocol stdio server and versioned JSON CLI (`schema: "kvtop/v1"`) allowing AI coding agents (OpenCode, Claude Code, agy) to query metrics and run deterministic health diagnoses.
+
+Works with Harvester, SUSE Virtualization, OpenShift Virtualization, and upstream KubeVirt.
 
 <p align="center">
   <img src="docs/assets/dashboard.png" alt="kvtop Dashboard Preview" width="800">
@@ -29,10 +33,13 @@ Built for live troubleshooting: see which VM is consuming resources right now, o
 
 ## Features
 
-- **Terminal UI**: Live braille graphs and sparklines for VM CPU, memory overcommit, network throughput, and disk IOPS.
+- **Terminal UI**: Live 2D Braille charts and sparklines for VM CPU, memory overcommit, network throughput, and disk IOPS.
 - **Client-side scraping**: Requires only standard `kubeconfig` credentials. Scrapes node `virt-handler` daemons in parallel through the Kubernetes API server pod proxy.
-- **On-demand drilldown**: Streams live `virsh domstats` for the selected VM to inspect per-vCPU wait time and queue delay, per-NIC throughput, and per-disk IOPS.
-- **Live migration tracking**: Watches KubeVirt informers to reflect VM phase transitions, host placements, and migrations immediately.
+- **Zero cluster footprint**: Single static binary. No DaemonSets, CRDs, or agents installed in the cluster.
+- **Runs without Prometheus**: Works with `rancher-monitoring` disabled (default on Harvester). Scrapes directly from `virt-handler`.
+- **On-demand drilldown**: Streams live `virsh domstats` for a selected VM to inspect per-vCPU wait time, queue delay, per-NIC throughput, and per-disk IOPS.
+- **Live migration tracking**: Watches Kubernetes informers to reflect VM phase transitions, host movements, and migrations immediately.
+- **Agent CLI & MCP Server**: Non-interactive JSON output (`kvtop top`, `kvtop vm`, `kvtop nodes`, `kvtop diagnose`) and a built-in MCP server for AI agents.
 
 ---
 
@@ -101,14 +108,14 @@ kvtop --replay testdata/
 
 ## CLI & Agent Subcommands
 
-In addition to the interactive TUI, `kvtop` provides non-interactive subcommands outputting structured, versioned JSON (`"schema": "kvtop/v1"`) or human-readable tables (`-o table`):
+`kvtop` provides non-interactive subcommands that output versioned JSON (`"schema": "kvtop/v1"`) or formatted tables (`-o table`):
 
 ```bash
-# List top VMs sorted by CPU, memory, network, or disk
+# Top VMs sorted by resource usage
 kvtop top --sort cpu -n 10 -o json
 kvtop top --sort mem --ns default -o table
 
-# Inspect a specific VM with CPU topology, memory specs, conditions, and volumes
+# Inspect a single VM (CPU topology, memory specs, conditions, volumes, metrics)
 kvtop vm default/coriolis-win-minion -o json
 kvtop vm default/coriolis-win-minion -o table
 
@@ -116,11 +123,11 @@ kvtop vm default/coriolis-win-minion -o table
 kvtop nodes -o json
 kvtop nodes -o table
 
-# Run deterministic health diagnosis rules (CPU saturation, memory pressure, disk latency, imbalance)
+# Run deterministic diagnosis rules (CPU saturation, memory pressure, disk latency, imbalance)
 kvtop diagnose -o json
 kvtop diagnose --ns default -o table
 
-# Record live cluster metrics for offline replay and anonymized testing
+# Record live cluster metrics for offline replay and sanitization
 kvtop record --out ./fixtures --duration 10m --anonymize
 ```
 
@@ -128,24 +135,24 @@ kvtop record --out ./fixtures --duration 10m --anonymize
 
 ## Model Context Protocol (MCP)
 
-`kvtop` includes a built-in [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server (`kvtop mcp`) that communicates over stdio using JSON-RPC 2.0.
+`kvtop` includes an [MCP](https://modelcontextprotocol.io/) server (`kvtop mcp`) that communicates over stdio using JSON-RPC 2.0.
 
-Because `kvtop mcp` runs as a long-lived process, it maintains warm in-memory ring buffers in the background. Tools answer AI agent queries immediately with zero latency and complete trend summaries (`min`, `avg`, `max`, `p95`, `last`).
+Because `kvtop mcp` runs continuously, it keeps in-memory ring buffers warm. Tools answer queries immediately with window summaries (`min`, `avg`, `max`, `p95`, `last`) instead of waiting for a scrape window.
 
 ### Available MCP Tools
 
 | Tool | Description | Key Parameters |
 |---|---|---|
 | `top` | List top VMs by resource consumption | `sort` (cpu, mem, net, disk), `limit`, `namespaces`, `node`, `window` |
-| `vm` | Deep inspection of a specific VM | `namespace`, `name`, `window`, `include_samples`, `allow_exec` |
+| `vm` | Inspect a specific VM | `namespace`, `name`, `window`, `include_samples`, `allow_exec` |
 | `nodes` | Physical host capacity and overcommit | `limit`, `window` |
-| `diagnose` | Deterministic performance & health rule evaluation | `target_vm`, `namespaces`, `node`, `window`, `threshold_*` |
+| `diagnose` | Deterministic performance and health rules | `target_vm`, `namespaces`, `node`, `window`, `threshold_*` |
 
-### Setting Up with AI Tools
+### Tool Setup
 
 #### 1. OpenCode
 
-Add to your project's `opencode.json` (or `~/.config/opencode/opencode.json`):
+Add to `opencode.json` (or `~/.config/opencode/opencode.json`):
 
 ```json
 {
@@ -159,7 +166,7 @@ Add to your project's `opencode.json` (or `~/.config/opencode/opencode.json`):
 }
 ```
 
-If your cluster requires a specific kubeconfig:
+With custom kubeconfig:
 
 ```json
 {
@@ -175,13 +182,12 @@ If your cluster requires a specific kubeconfig:
 
 #### 2. Claude Code
 
-Add `kvtop` using the Claude Code CLI:
+Add `kvtop` using the CLI:
 
 ```bash
-# Add kvtop MCP server
 claude mcp add kvtop -- kvtop mcp
 
-# With custom kubeconfig or options
+# With custom kubeconfig
 claude mcp add kvtop -- kvtop mcp --kubeconfig /path/to/kubeconfig
 ```
 
@@ -200,15 +206,16 @@ Or configure via `.mcp.json` in your repository root:
 
 #### 3. agy
 
-Add `kvtop` using the `agy mcp` command:
+Add `kvtop` using `agy mcp`:
 
 ```bash
-# Add kvtop MCP server
 agy mcp add kvtop kvtop mcp
 
-# With custom kubeconfig or options
+# With custom kubeconfig
 agy mcp add kvtop -- kvtop mcp --kubeconfig /path/to/kubeconfig
 ```
+
+For ready-to-use troubleshooting prompts, see the [MCP Prompt Guide](docs/mcp-prompts.md).
 
 ---
 
@@ -240,8 +247,9 @@ The `scripts/load-generator.sh` script runs stress workloads on guest VMs throug
 
 ## Documentation
 
-- [User Manual & Metric Reference](docs/manual.md): Comprehensive guide to metric semantics, memory overcommit, proxy architecture, and full keybindings list.
-- [Architecture & Internal Design](docs/architecture.md): Deep-dive into the two-frontend single-core architecture, query engine, ring buffer memory layout, and agent JSON contract.
+- [User Manual & Metric Reference](docs/manual.md): Metric semantics, memory overcommit, proxy architecture, and full keybindings list.
+- [Architecture & Internal Design](docs/architecture.md): Two-frontend single-core architecture, query engine, ring buffer memory layout, and JSON contract.
+- [MCP Prompt Guide](docs/mcp-prompts.md): Catalog of troubleshooting questions for AI agents (OpenCode, Claude Code, agy).
 
 ---
 
