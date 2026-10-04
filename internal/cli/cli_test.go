@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"os"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -249,6 +250,59 @@ func TestCLIDiagnoseTable(t *testing.T) {
 	out := stdout.String()
 	if !strings.Contains(out, "SEVERITY") || !strings.Contains(out, "RULE ID") {
 		t.Errorf("expected table header in stdout, got:\n%s", out)
+	}
+}
+
+func TestCLIRecordAndReplay(t *testing.T) {
+	testdataDir := filepath.Join("..", "..", "testdata")
+	tempOut, err := os.MkdirTemp("", "kvtop-cli-record-*")
+	if err != nil {
+		t.Fatalf("failed creating temp dir: %v", err)
+	}
+	defer os.RemoveAll(tempOut)
+
+	stdoutRecord := &bytes.Buffer{}
+	stderrRecord := &bytes.Buffer{}
+
+	recordArgs := []string{
+		"record",
+		"--replay", testdataDir,
+		"--out", tempOut,
+		"--anonymize",
+	}
+
+	exitCode := cli.Run(context.Background(), recordArgs, stdoutRecord, stderrRecord)
+	if exitCode != 0 {
+		t.Fatalf("record failed with code %d, stderr: %s, stdout: %s", exitCode, stderrRecord.String(), stdoutRecord.String())
+	}
+
+	// Verify that top can immediately query the anonymized recording
+	stdoutTop := &bytes.Buffer{}
+	stderrTop := &bytes.Buffer{}
+	topArgs := []string{
+		"top",
+		"--replay", tempOut,
+		"-n", "5",
+		"-o", "json",
+	}
+
+	exitCodeTop := cli.Run(context.Background(), topArgs, stdoutTop, stderrTop)
+	if exitCodeTop != 0 {
+		t.Fatalf("top failed on recorded directory with code %d: %s", exitCodeTop, stderrTop.String())
+	}
+
+	var topRes query.TopResult
+	if err := json.Unmarshal(stdoutTop.Bytes(), &topRes); err != nil {
+		t.Fatalf("failed unmarshaling top json from recorded dir: %v", err)
+	}
+	if topRes.Total == 0 {
+		t.Errorf("expected VMs in recorded replay directory")
+	}
+	// Verify names are anonymized
+	for _, item := range topRes.Items {
+		if !strings.HasPrefix(item.Name, "vm-") {
+			t.Errorf("expected anonymized VM name vm-*, got %s", item.Name)
+		}
 	}
 }
 

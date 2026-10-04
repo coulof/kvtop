@@ -31,6 +31,8 @@ var (
 )
 
 func main() {
+	cli.Version = Version
+
 	if len(os.Args) > 1 && !strings.HasPrefix(os.Args[1], "-") {
 		ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 		defer cancel()
@@ -44,11 +46,18 @@ func main() {
 	replayDir := flag.String("replay", "", "Directory containing recorded scrape fixtures to replay")
 	namespace := flag.String("namespace", "", "Filter by namespace (defaults to all)")
 	virtHandlerNS := flag.String("virt-handler-namespace", "harvester-system", "Namespace where virt-handler pods run")
-	interval := flag.Duration("interval", 2*time.Second, "Scrape interval")
+	interval := flag.Duration("interval", 2*time.Second, "Scrape polling interval")
 	plainText := flag.Bool("plain-text", false, "Output plain text table instead of interactive TUI")
 	count := flag.Int("count", 0, "Number of table updates to print (only in plain-text mode, 0 for continuous)")
 	sortBy := flag.String("sort", "name", "Sort by: name, cpu, mem, net, disk")
 	bySaturation := flag.Bool("by-saturation", false, "Sort CPU by saturation (used/allotted) instead of absolute cores")
+
+	flag.Usage = func() {
+		cli.PrintUsage(os.Stderr)
+		fmt.Fprintln(os.Stderr, "\nTUI / Standalone Flags:")
+		flag.PrintDefaults()
+	}
+
 	flag.Parse()
 
 	if *showVersion {

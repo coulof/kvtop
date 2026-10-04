@@ -99,6 +99,119 @@ kvtop --replay testdata/
 
 ---
 
+## CLI & Agent Subcommands
+
+In addition to the interactive TUI, `kvtop` provides non-interactive subcommands outputting structured, versioned JSON (`"schema": "kvtop/v1"`) or human-readable tables (`-o table`):
+
+```bash
+# List top VMs sorted by CPU, memory, network, or disk
+kvtop top --sort cpu -n 10 -o json
+kvtop top --sort mem --ns default -o table
+
+# Inspect a specific VM with CPU topology, memory specs, conditions, and volumes
+kvtop vm default/coriolis-win-minion -o json
+kvtop vm default/coriolis-win-minion -o table
+
+# Inspect physical cluster nodes, VM density, and memory overcommit
+kvtop nodes -o json
+kvtop nodes -o table
+
+# Run deterministic health diagnosis rules (CPU saturation, memory pressure, disk latency, imbalance)
+kvtop diagnose -o json
+kvtop diagnose --ns default -o table
+
+# Record live cluster metrics for offline replay and anonymized testing
+kvtop record --out ./fixtures --duration 10m --anonymize
+```
+
+---
+
+## Model Context Protocol (MCP)
+
+`kvtop` includes a built-in [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server (`kvtop mcp`) that communicates over stdio using JSON-RPC 2.0.
+
+Because `kvtop mcp` runs as a long-lived process, it maintains warm in-memory ring buffers in the background. Tools answer AI agent queries immediately with zero latency and complete trend summaries (`min`, `avg`, `max`, `p95`, `last`).
+
+### Available MCP Tools
+
+| Tool | Description | Key Parameters |
+|---|---|---|
+| `top` | List top VMs by resource consumption | `sort` (cpu, mem, net, disk), `limit`, `namespaces`, `node`, `window` |
+| `vm` | Deep inspection of a specific VM | `namespace`, `name`, `window`, `include_samples`, `allow_exec` |
+| `nodes` | Physical host capacity and overcommit | `limit`, `window` |
+| `diagnose` | Deterministic performance & health rule evaluation | `target_vm`, `namespaces`, `node`, `window`, `threshold_*` |
+
+### Setting Up with AI Tools
+
+#### 1. OpenCode
+
+Add to your project's `opencode.json` (or `~/.config/opencode/opencode.json`):
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "kvtop": {
+      "type": "local",
+      "command": ["kvtop", "mcp"]
+    }
+  }
+}
+```
+
+If your cluster requires a specific kubeconfig:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "kvtop": {
+      "type": "local",
+      "command": ["kvtop", "mcp", "--kubeconfig", "/path/to/kubeconfig"]
+    }
+  }
+}
+```
+
+#### 2. Claude Code
+
+Add `kvtop` using the Claude Code CLI:
+
+```bash
+# Add kvtop MCP server
+claude mcp add kvtop -- kvtop mcp
+
+# With custom kubeconfig or options
+claude mcp add kvtop -- kvtop mcp --kubeconfig /path/to/kubeconfig
+```
+
+Or configure via `.mcp.json` in your repository root:
+
+```json
+{
+  "mcpServers": {
+    "kvtop": {
+      "command": "kvtop",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+#### 3. agy
+
+Add `kvtop` using the `agy mcp` command:
+
+```bash
+# Add kvtop MCP server
+agy mcp add kvtop kvtop mcp
+
+# With custom kubeconfig or options
+agy mcp add kvtop -- kvtop mcp --kubeconfig /path/to/kubeconfig
+```
+
+---
+
 ## Verification & Load Testing
 
 The `scripts/load-generator.sh` script runs stress workloads on guest VMs through the QEMU guest agent without SSH keys:

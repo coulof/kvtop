@@ -198,7 +198,7 @@ Do not add rules that need host-side data (CPU steal, PSI, host NIC saturation).
 6. **Detail view** [Completed]: virsh stream, per-vCPU, per-disk, per-NIC, RSS.
 7. **Agent CLI** [Completed]: `internal/query`, then `top`, `vm`, `nodes` with JSON output and the output rules above. Refactor the TUI to read through `internal/query` with no behaviour change.
 8. **Diagnose** [Completed]: `internal/diagnose`, the initial rule set, `kvtop diagnose`.
-9. **MCP and record**: `kvtop mcp`, `kvtop record`, `--anonymize`.
+9. **MCP and record** [Completed]: `kvtop mcp`, `kvtop record`, `--anonymize`.
 10. **Prometheus backend**: history backfill and time-range queries.
 11. **Backlog / Future**: Longhorn panel, alerts panel, namespace multi-select picker (`N`), tree mode (`t`).
 
