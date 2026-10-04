@@ -20,6 +20,8 @@ func RunNodes(ctx context.Context, args []string, stdout, stderr io.Writer) int 
 	fs.IntVar(limit, "limit", 0, "Maximum number of nodes to report (alias for -n)")
 	window := fs.Duration("window", 15*time.Second, "Sample window duration (minimum 10s)")
 	outputFormat := fs.String("o", "json", "Output format: json, table")
+	quiet := fs.Bool("q", false, "Suppress progress output on stderr")
+	fs.BoolVar(quiet, "quiet", false, "Suppress progress output on stderr (alias for -q)")
 
 	// Common connection flags
 	kubeconfig := fs.String("kubeconfig", "", "Path to kubeconfig")
@@ -57,7 +59,7 @@ func RunNodes(ctx context.Context, args []string, stdout, stderr io.Writer) int 
 	defer env.Cleanup()
 
 	var progressOut io.Writer
-	if *outputFormat == "table" {
+	if !*quiet {
 		progressOut = stderr
 	}
 

@@ -25,6 +25,8 @@ func RunDiagnose(ctx context.Context, args []string, stdout, stderr io.Writer) i
 	node := fs.String("node", "", "Filter by node name")
 	window := fs.Duration("window", 30*time.Second, "Sample window duration (minimum 10s)")
 	outputFormat := fs.String("o", "json", "Output format: json, table")
+	quiet := fs.Bool("q", false, "Suppress progress output on stderr")
+	fs.BoolVar(quiet, "quiet", false, "Suppress progress output on stderr (alias for -q)")
 
 	// Configurable thresholds
 	defTh := diagnose.DefaultThresholds()
@@ -88,7 +90,7 @@ func RunDiagnose(ctx context.Context, args []string, stdout, stderr io.Writer) i
 	defer env.Cleanup()
 
 	var progressOut io.Writer
-	if *outputFormat == "table" {
+	if !*quiet {
 		progressOut = stderr
 	}
 

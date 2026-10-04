@@ -32,6 +32,7 @@ Common Flags:
   --window <duration>     Metrics sampling window (default: 15s for top/vm/nodes, 30s for diagnose, min: 10s)
   -o, --output format     Output format: json, table (default: json for subcommands)
   -n, --limit <int>       Limit results (default: 10 for top)
+  -q, --quiet             Suppress progress updates on stderr during sampling window
   --replay <dir>          Run against recorded scrape fixtures
   --kubeconfig <path>     Path to kubeconfig file
   --interval <duration>   Scrape polling interval (default: 2s)

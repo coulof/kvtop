@@ -21,6 +21,8 @@ func RunVM(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 	outputFormat := fs.String("o", "json", "Output format: json, table")
 	samples := fs.Bool("samples", false, "Include raw time-series samples")
 	allowExec := fs.Bool("allow-exec", false, "Allow virsh exec drilldown into launcher pod")
+	quiet := fs.Bool("q", false, "Suppress progress output on stderr")
+	fs.BoolVar(quiet, "quiet", false, "Suppress progress output on stderr (alias for -q)")
 
 	// Common connection flags
 	kubeconfig := fs.String("kubeconfig", "", "Path to kubeconfig")
@@ -93,7 +95,7 @@ func RunVM(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 	defer env.Cleanup()
 
 	var progressOut io.Writer
-	if *outputFormat == "table" {
+	if !*quiet {
 		progressOut = stderr
 	}
 

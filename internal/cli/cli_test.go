@@ -51,6 +51,32 @@ func TestCLITopJSON(t *testing.T) {
 	}
 }
 
+func TestCLITopProgressAndQuiet(t *testing.T) {
+	testdataDir := filepath.Join("..", "..", "testdata")
+
+	// 1. Without --quiet, stderr receives sampling progress message
+	stdout := &bytes.Buffer{}
+	stderr := &bytes.Buffer{}
+	exitCode := cli.Run(context.Background(), []string{"top", "--replay", testdataDir, "-o", "json"}, stdout, stderr)
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+	if !strings.Contains(stderr.String(), "[kvtop]") {
+		t.Errorf("expected progress message on stderr, got: %s", stderr.String())
+	}
+
+	// 2. With --quiet, stderr is completely silent
+	stdoutQ := &bytes.Buffer{}
+	stderrQ := &bytes.Buffer{}
+	exitCodeQ := cli.Run(context.Background(), []string{"top", "--replay", testdataDir, "--quiet", "-o", "json"}, stdoutQ, stderrQ)
+	if exitCodeQ != 0 {
+		t.Fatalf("expected exit code 0 with --quiet, got %d", exitCodeQ)
+	}
+	if stderrQ.Len() != 0 {
+		t.Errorf("expected empty stderr with --quiet, got: %s", stderrQ.String())
+	}
+}
+
 func TestCLITopTable(t *testing.T) {
 	testdataDir := filepath.Join("..", "..", "testdata")
 	stdout := &bytes.Buffer{}

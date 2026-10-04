@@ -47,6 +47,8 @@ func RunTop(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 	window := fs.Duration("window", 15*time.Second, "Sample window duration (minimum 10s)")
 	outputFormat := fs.String("o", "json", "Output format: json, table")
 	samples := fs.Bool("samples", false, "Include raw time-series samples")
+	quiet := fs.Bool("q", false, "Suppress progress output on stderr")
+	fs.BoolVar(quiet, "quiet", false, "Suppress progress output on stderr (alias for -q)")
 
 	// Common connection flags
 	kubeconfig := fs.String("kubeconfig", "", "Path to kubeconfig")
@@ -83,9 +85,8 @@ func RunTop(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 	}
 	defer env.Cleanup()
 
-	// Show progress only in table mode or if stderr is a terminal
 	var progressOut io.Writer
-	if *outputFormat == "table" {
+	if !*quiet {
 		progressOut = stderr
 	}
 

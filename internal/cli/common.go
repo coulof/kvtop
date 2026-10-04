@@ -4,12 +4,15 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"os"
+	"strings"
 	"time"
 
 	"github.com/coulof/kvtop/internal/collect"
 	"github.com/coulof/kvtop/internal/kube"
 	"github.com/coulof/kvtop/internal/query"
 	"github.com/coulof/kvtop/internal/store"
+	"github.com/mattn/go-isatty"
 )
 
 // CommonConfig contains runtime flags shared across CLI commands.
@@ -104,6 +107,13 @@ func WarmUpWindow(ctx context.Context, env *RuntimeEnvironment, window, interval
 		interval = 2 * time.Second
 	}
 
+	isTTY := false
+	if progressOut != nil {
+		if f, ok := progressOut.(*os.File); ok {
+			isTTY = isatty.IsTerminal(f.Fd()) || isatty.IsCygwinTerminal(f.Fd())
+		}
+	}
+
 	// 1. Initial baseline sample
 	initSamples, err := env.Collector.Collect(ctx)
 	if err == nil {
@@ -112,6 +122,9 @@ func WarmUpWindow(ctx context.Context, env *RuntimeEnvironment, window, interval
 
 	// 2. Replay mode: fast-forward simulated ticks instantaneously
 	if env.IsReplay {
+		if progressOut != nil {
+			fmt.Fprintf(progressOut, "[kvtop] Simulating %.0fs metrics window from replay fixtures...\n", window.Seconds())
+		}
 		ticks := int(window / interval)
 		if ticks < 2 {
 			ticks = 2
@@ -126,25 +139,67 @@ func WarmUpWindow(ctx context.Context, env *RuntimeEnvironment, window, interval
 		return nil
 	}
 
-	// 3. Live cluster mode: block across the window
+	// 3. Live cluster mode: block across the window with live progression
+	startTime := time.Now()
+	target := startTime.Add(window)
+	scrapes := 1
+
 	if progressOut != nil {
-		fmt.Fprintf(progressOut, "Waiting for %v metrics collection window to compute rates...\n", window)
+		if isTTY {
+			fmt.Fprintf(progressOut, "\r\033[K[kvtop] Sampling metrics: [>                   ] 0s / %.0fs (1 scrape)...", window.Seconds())
+		} else {
+			fmt.Fprintf(progressOut, "[kvtop] Sampling metrics over %.0fs window (interval: %v)...\n", window.Seconds(), interval)
+		}
 	}
 
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 
-	target := time.Now().Add(window)
 	for {
 		select {
 		case <-ctx.Done():
+			if progressOut != nil && isTTY {
+				fmt.Fprintln(progressOut)
+			}
 			return ctx.Err()
 		case <-ticker.C:
 			samples, err := env.Collector.Collect(ctx)
 			if err == nil {
 				env.Store.PushSamples(samples)
 			}
+			scrapes++
+
+			elapsed := time.Since(startTime)
+			if elapsed > window {
+				elapsed = window
+			}
+
+			if progressOut != nil {
+				if isTTY {
+					ratio := elapsed.Seconds() / window.Seconds()
+					if ratio > 1.0 {
+						ratio = 1.0
+					}
+					barWidth := 20
+					filled := int(ratio * float64(barWidth))
+					bar := strings.Repeat("=", filled)
+					if filled < barWidth {
+						bar += ">" + strings.Repeat(" ", barWidth-filled-1)
+					}
+					fmt.Fprintf(progressOut, "\r\033[K[kvtop] Sampling metrics: [%s] %.0fs / %.0fs (%d scrapes)...", bar, elapsed.Seconds(), window.Seconds(), scrapes)
+				} else {
+					fmt.Fprintf(progressOut, "[kvtop] Sampling progress: %.0fs / %.0fs (%d scrapes)...\n", elapsed.Seconds(), window.Seconds(), scrapes)
+				}
+			}
+
 			if time.Now().After(target) {
+				if progressOut != nil {
+					if isTTY {
+						fmt.Fprintf(progressOut, "\r\033[K[kvtop] Sampling complete: %.0fs window (%d scrapes). Computing rates...\n", window.Seconds(), scrapes)
+					} else {
+						fmt.Fprintf(progressOut, "[kvtop] Sampling complete: %.0fs window (%d scrapes). Computing rates...\n", window.Seconds(), scrapes)
+					}
+				}
 				return nil
 			}
 		}
