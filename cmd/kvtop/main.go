@@ -13,8 +13,10 @@ import (
 	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/coulof/kvtop/internal/cli"
 	"github.com/coulof/kvtop/internal/collect"
 	"github.com/coulof/kvtop/internal/kube"
+	"github.com/coulof/kvtop/internal/query"
 	"github.com/coulof/kvtop/internal/store"
 	"github.com/coulof/kvtop/internal/ui"
 )
@@ -29,6 +31,13 @@ var (
 )
 
 func main() {
+	if len(os.Args) > 1 && !strings.HasPrefix(os.Args[1], "-") {
+		ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+		defer cancel()
+		code := cli.Run(ctx, os.Args[1:], os.Stdout, os.Stderr)
+		os.Exit(code)
+	}
+
 	showVersion := flag.Bool("version", false, "Print version information and exit")
 	flag.BoolVar(showVersion, "v", false, "Print version information and exit")
 	kubeconfig := flag.String("kubeconfig", "", "Path to kubeconfig file")
@@ -76,9 +85,10 @@ func main() {
 		// Seed replay nodes
 		for _, n := range []string{"hv-01", "hv-02", "hv-03", "hv-04"} {
 			st.OnNodeUpdated(kube.NodeInfo{
-				Name:           n,
-				AllocatableMem: 96 * 1024 * 1024 * 1024,
-				Ready:          true,
+				Name:            n,
+				AllocatableMem:  96 * 1024 * 1024 * 1024,
+				AllocatableCPUs: 16,
+				Ready:           true,
 			})
 		}
 	} else {
@@ -133,14 +143,16 @@ func main() {
 		}
 	}()
 
+	engine := query.NewEngine(st, kClient, *replayDir)
+
 	// If plain text mode is requested or non-interactive count > 0:
 	if *plainText || *count > 0 {
-		runPlainTextMode(ctx, st, *namespace, *sortBy, *bySaturation, *interval, *count)
+		runPlainTextMode(ctx, engine, *namespace, *sortBy, *bySaturation, *interval, *count)
 		return
 	}
 
 	// Interactive TUI Mode
-	app := ui.NewAppModel(st, clusterName, kubeVersion, *interval)
+	app := ui.NewAppModel(engine, clusterName, kubeVersion, *interval)
 
 	if *replayDir != "" {
 		replayPath := *replayDir
@@ -193,7 +205,7 @@ func main() {
 
 func runPlainTextMode(
 	ctx context.Context,
-	st *store.Store,
+	engine query.SnapshotProvider,
 	nsFilter string,
 	sortBy string,
 	bySaturation bool,
@@ -209,7 +221,7 @@ func runPlainTextMode(
 		case <-ctx.Done():
 			return
 		case <-ticker.C:
-			snap := st.Snapshot(nsFilter)
+			snap := engine.Snapshot(nsFilter)
 			sortVMs(snap.VMs, sortBy, bySaturation)
 			printSummaryAndTable(snap)
 

@@ -127,7 +127,8 @@ The `scripts/load-generator.sh` script runs stress workloads on guest VMs throug
 
 ## Documentation
 
-- [User Manual & Architecture Reference](docs/manual.md): Comprehensive guide to metric semantics, memory overcommit, proxy architecture, and full keybindings list.
+- [User Manual & Metric Reference](docs/manual.md): Comprehensive guide to metric semantics, memory overcommit, proxy architecture, and full keybindings list.
+- [Architecture & Internal Design](docs/architecture.md): Deep-dive into the two-frontend single-core architecture, query engine, ring buffer memory layout, and agent JSON contract.
 
 ---
 

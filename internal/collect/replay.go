@@ -118,24 +118,15 @@ func LoadReplayVMIs(dir string) ([]kube.VMIInfo, error) {
 		return nil, fmt.Errorf("failed to read %s: %w", vmiPath, err)
 	}
 
-	var rawMap map[string]interface{}
-	if err := json.Unmarshal(data, &rawMap); err != nil {
+	var list unstructured.UnstructuredList
+	if err := json.Unmarshal(data, &list); err != nil {
 		return nil, fmt.Errorf("failed to parse %s as json: %w", vmiPath, err)
 	}
 
-	items, ok := rawMap["items"].([]interface{})
-	if !ok {
-		return nil, nil
-	}
-
 	var results []kube.VMIInfo
-	for _, item := range items {
-		itemMap, ok := item.(map[string]interface{})
-		if !ok {
-			continue
-		}
-		u := &unstructured.Unstructured{Object: itemMap}
-		results = append(results, kube.ExtractVMIInfo(u))
+	for _, item := range list.Items {
+		itemCopy := item
+		results = append(results, kube.ExtractVMIInfo(&itemCopy))
 	}
 
 	return results, nil

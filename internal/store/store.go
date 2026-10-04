@@ -67,6 +67,18 @@ type VMMetrics struct {
 	NetRxHistory       *RingBuffer
 	NetTxHistory       *RingBuffer
 	StorageIOPSHistory *RingBuffer
+
+	// Sizing & Metadata Context
+	CPUTopology           kube.CPUTopology
+	DedicatedCPUPlacement bool
+	MemoryGuest           string
+	MemoryRequested       string
+	MemoryLimit           string
+	InstanceType          string
+	Preference            string
+	EvictionStrategy      string
+	Conditions            []kube.VMICondition
+	Volumes               []kube.VMIVolumeInfo
 }
 
 // VMSnapshot represents an immutable point-in-time view of a VM for UI rendering.
@@ -95,6 +107,18 @@ type VMSnapshot struct {
 	NetRxBytesPerSec float64
 	NetTxBytesPerSec float64
 	StorageTotalIOPS float64
+
+	// Sizing & Metadata Context
+	CPUTopology           kube.CPUTopology
+	DedicatedCPUPlacement bool
+	MemoryGuest           string
+	MemoryRequested       string
+	MemoryLimit           string
+	InstanceType          string
+	Preference            string
+	EvictionStrategy      string
+	Conditions            []kube.VMICondition
+	Volumes               []kube.VMIVolumeInfo
 
 	// History slices ordered oldest to newest (for sparklines & charts)
 	CPUHistory         []float64
@@ -140,7 +164,7 @@ func NewStore(historyCapacity int) *Store {
 	}
 }
 
-// UpdateVMIs merges VMI metadata (allotted vCPUs, phase, node placement).
+// UpdateVMIs merges VMI metadata (allotted vCPUs, phase, node placement, sizing, context).
 func (s *Store) UpdateVMIs(vmis []kube.VMIInfo) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -152,18 +176,7 @@ func (s *Store) UpdateVMIs(vmis []kube.VMIInfo) {
 			vm = s.newVMMetrics(vmi.Namespace, vmi.Name, vmi.NodeName)
 			s.vms[key] = vm
 		}
-		if vmi.NodeName != "" {
-			vm.Node = vmi.NodeName
-		}
-		if vmi.Phase != "" {
-			vm.Phase = vmi.Phase
-		}
-		if vmi.CPUCores > 0 {
-			vm.AllottedCPUs = vmi.CPUCores
-		}
-		if vmi.IP != "" {
-			vm.IP = vmi.IP
-		}
+		s.applyVMIMetadata(vm, vmi)
 	}
 }
 
@@ -311,6 +324,52 @@ func (s *Store) GetAllVMs() []VMSnapshot {
 	return res
 }
 
+// VMHistoryPoints holds the raw timestamped points for a VM's metrics.
+type VMHistoryPoints struct {
+	CPUHistory         []Point
+	MemHistory         []Point
+	NetRxHistory       []Point
+	NetTxHistory       []Point
+	StorageIOPSHistory []Point
+}
+
+// GetVMHistoryPoints returns timestamped points for a specific VM.
+func (s *Store) GetVMHistoryPoints(namespace, name string) (VMHistoryPoints, bool) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	key := fmt.Sprintf("%s/%s", namespace, name)
+	vm, exists := s.vms[key]
+	if !exists {
+		return VMHistoryPoints{}, false
+	}
+	return VMHistoryPoints{
+		CPUHistory:         vm.CPUHistory.Points(),
+		MemHistory:         vm.MemHistory.Points(),
+		NetRxHistory:       vm.NetRxHistory.Points(),
+		NetTxHistory:       vm.NetTxHistory.Points(),
+		StorageIOPSHistory: vm.StorageIOPSHistory.Points(),
+	}, true
+}
+
+// GetAllVMHistoryPoints returns timestamped points for all VMs keyed by namespace/name.
+func (s *Store) GetAllVMHistoryPoints() map[string]VMHistoryPoints {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	res := make(map[string]VMHistoryPoints, len(s.vms))
+	for k, vm := range s.vms {
+		res[k] = VMHistoryPoints{
+			CPUHistory:         vm.CPUHistory.Points(),
+			MemHistory:         vm.MemHistory.Points(),
+			NetRxHistory:       vm.NetRxHistory.Points(),
+			NetTxHistory:       vm.NetTxHistory.Points(),
+			StorageIOPSHistory: vm.StorageIOPSHistory.Points(),
+		}
+	}
+	return res
+}
+
 func (s *Store) newVMMetrics(ns, name, node string) *VMMetrics {
 	return &VMMetrics{
 		Namespace:          ns,
@@ -360,6 +419,16 @@ func (s *Store) snapshotVM(vm *VMMetrics) VMSnapshot {
 		NetRxBytesPerSec:     vm.NetRxBytesPerSec,
 		NetTxBytesPerSec:     vm.NetTxBytesPerSec,
 		StorageTotalIOPS:     vm.StorageTotalIOPS,
+		CPUTopology:           vm.CPUTopology,
+		DedicatedCPUPlacement: vm.DedicatedCPUPlacement,
+		MemoryGuest:           vm.MemoryGuest,
+		MemoryRequested:       vm.MemoryRequested,
+		MemoryLimit:           vm.MemoryLimit,
+		InstanceType:          vm.InstanceType,
+		Preference:            vm.Preference,
+		EvictionStrategy:      vm.EvictionStrategy,
+		Conditions:            vm.Conditions,
+		Volumes:               vm.Volumes,
 		CPUHistory:           vm.CPUHistory.Values(),
 		MemHistory:           vm.MemHistory.Values(),
 		NetRxHistory:         vm.NetRxHistory.Values(),
@@ -368,22 +437,11 @@ func (s *Store) snapshotVM(vm *VMMetrics) VMSnapshot {
 	}
 }
 
-// OnVMIUpdated is called by the VMI informer when a VMI is created or modified.
-func (s *Store) OnVMIUpdated(vmi kube.VMIInfo) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
-	key := fmt.Sprintf("%s/%s", vmi.Namespace, vmi.Name)
-	vm, exists := s.vms[key]
-	if !exists {
-		vm = s.newVMMetrics(vmi.Namespace, vmi.Name, vmi.NodeName)
-		s.vms[key] = vm
-	}
-
-	// Immediate state change
+func (s *Store) applyVMIMetadata(vm *VMMetrics, vmi kube.VMIInfo) {
 	if vmi.NodeName != "" {
 		if vm.Node != "" && vm.Node != vmi.NodeName {
 			// Node move detected: clear migration and reset trackers to prevent spikes
+			key := fmt.Sprintf("%s/%s", vm.Namespace, vm.Name)
 			delete(s.migrations, key)
 			vm.IsMigrating = false
 			vm.hasPrev = false
@@ -406,7 +464,47 @@ func (s *Store) OnVMIUpdated(vmi kube.VMIInfo) {
 	if vmi.IP != "" {
 		vm.IP = vmi.IP
 	}
+	vm.CPUTopology = vmi.CPUTopology
+	vm.DedicatedCPUPlacement = vmi.DedicatedCPUPlacement
+	if vmi.MemoryGuest != "" {
+		vm.MemoryGuest = vmi.MemoryGuest
+	}
+	if vmi.MemoryRequested != "" {
+		vm.MemoryRequested = vmi.MemoryRequested
+	}
+	if vmi.MemoryLimit != "" {
+		vm.MemoryLimit = vmi.MemoryLimit
+	}
+	if vmi.InstanceType != "" {
+		vm.InstanceType = vmi.InstanceType
+	}
+	if vmi.Preference != "" {
+		vm.Preference = vmi.Preference
+	}
+	if vmi.EvictionStrategy != "" {
+		vm.EvictionStrategy = vmi.EvictionStrategy
+	}
+	if len(vmi.Conditions) > 0 {
+		vm.Conditions = vmi.Conditions
+	}
+	if len(vmi.Volumes) > 0 {
+		vm.Volumes = vmi.Volumes
+	}
 	s.namespaces[vmi.Namespace] = true
+}
+
+// OnVMIUpdated is called by the VMI informer when a VMI is created or modified.
+func (s *Store) OnVMIUpdated(vmi kube.VMIInfo) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	key := fmt.Sprintf("%s/%s", vmi.Namespace, vmi.Name)
+	vm, exists := s.vms[key]
+	if !exists {
+		vm = s.newVMMetrics(vmi.Namespace, vmi.Name, vmi.NodeName)
+		s.vms[key] = vm
+	}
+	s.applyVMIMetadata(vm, vmi)
 }
 
 // OnVMIDeleted is called by the VMI informer when a VMI is deleted.

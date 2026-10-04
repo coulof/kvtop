@@ -18,6 +18,7 @@ type NodeAggregate struct {
 	MemoryUsedBytes      uint64
 	MemoryAllocatedBytes uint64
 	NodeAllocatableBytes int64
+	NodeAllocatableCPUs  int64
 	OvercommitRatio      float64
 	NetRxBytesPerSec     float64
 	NetTxBytesPerSec     float64
@@ -92,9 +93,11 @@ func (s *Store) Snapshot(namespaceFilter string) StoreSnapshot {
 		if r, ok := s.nodeReady[node]; ok {
 			ready = r
 		}
+		allocCPU := s.nodeCPUs[node]
 		nodeMap[node] = &NodeAggregate{
 			NodeName:             node,
 			NodeAllocatableBytes: allocMem,
+			NodeAllocatableCPUs:  allocCPU,
 			Ready:                ready,
 		}
 	}
@@ -122,6 +125,7 @@ func (s *Store) Snapshot(namespaceFilter string) StoreSnapshot {
 			na, exists := nodeMap[vm.Node]
 			if !exists {
 				allocMem := s.nodeAllocatable[vm.Node]
+				allocCPU := s.nodeCPUs[vm.Node]
 				ready := true
 				if r, ok := s.nodeReady[vm.Node]; ok {
 					ready = r
@@ -129,6 +133,7 @@ func (s *Store) Snapshot(namespaceFilter string) StoreSnapshot {
 				na = &NodeAggregate{
 					NodeName:             vm.Node,
 					NodeAllocatableBytes: allocMem,
+					NodeAllocatableCPUs:  allocCPU,
 					Ready:                ready,
 				}
 				nodeMap[vm.Node] = na

@@ -7,6 +7,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/coulof/kvtop/internal/collect"
+	"github.com/coulof/kvtop/internal/query"
 	"github.com/coulof/kvtop/internal/store"
 )
 
@@ -28,7 +29,7 @@ type DetailStreamStarter func(ctx context.Context, namespace, vmiName string, st
 
 // AppModel is the root Bubbletea model for kvtop.
 type AppModel struct {
-	store           *store.Store
+	queryEngine     query.SnapshotProvider
 	interval        time.Duration
 	width           int
 	height          int
@@ -54,15 +55,15 @@ type AppModel struct {
 	lastSnapshot store.StoreSnapshot
 }
 
-// NewAppModel creates the top-level application model.
-func NewAppModel(st *store.Store, clusterName, kubeVersion string, interval time.Duration) *AppModel {
+// NewAppModel creates the top-level application model reading through query.SnapshotProvider.
+func NewAppModel(engine query.SnapshotProvider, clusterName, kubeVersion string, interval time.Duration) *AppModel {
 	if interval <= 0 {
 		interval = 2 * time.Second
 	}
 	return &AppModel{
-		store:    st,
-		interval: interval,
-		focus:    FocusTable,
+		queryEngine: engine,
+		interval:    interval,
+		focus:       FocusTable,
 		header: HeaderModel{
 			ClusterName: clusterName,
 			KubeVersion: kubeVersion,
@@ -97,7 +98,7 @@ func (m AppModel) tickCmd() tea.Cmd {
 func (m AppModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	// Background store refresh tick always updates the snapshot and reschedules
 	if _, isTick := msg.(TickMsg); isTick {
-		m.lastSnapshot = m.store.Snapshot(m.namespaceFilter)
+		m.lastSnapshot = m.queryEngine.Snapshot(m.namespaceFilter)
 		return m, m.tickCmd()
 	}
 
@@ -324,6 +325,10 @@ func (m AppModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				if pod, err := m.detailStreamStarter(ctx, selectedVM.Namespace, selectedVM.Name, statsChan); err == nil && pod != "" {
 					podName = pod
 				}
+			} else if m.queryEngine != nil {
+				if pod, err := m.queryEngine.StreamVirshStats(ctx, selectedVM.Namespace, selectedVM.Name, statsChan); err == nil && pod != "" {
+					podName = pod
+				}
 			}
 
 			m.detail = NewDetailModel(selectedVM, podName)
@@ -362,7 +367,7 @@ func (m AppModel) View() string {
 
 	snap := m.lastSnapshot
 	if len(snap.Nodes) == 0 && len(snap.VMs) == 0 {
-		snap = m.store.Snapshot(m.namespaceFilter)
+		snap = m.queryEngine.Snapshot(m.namespaceFilter)
 	}
 
 	headerView := m.header.View(m.width, snap, len(snap.Nodes))

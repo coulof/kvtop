@@ -4,6 +4,8 @@
 
 `kvtop` (KubeVirt top): a btop-style terminal UI showing live CPU, memory, network and disk usage of VMs on a Harvester / SUSE Virtualization cluster.
 
+It has two frontends on one core: the TUI for humans (shipped in v0.1.0), and a JSON CLI / MCP server so an AI agent can query and diagnose VM performance (in progress).
+
 Primary job: live troubleshooting. "Which VM is the noisy neighbour right now, on which node, in which namespace."
 
 Target: Harvester v1.6+ (developed against v1.9), often air-gapped. The only thing the user is guaranteed to have is an admin kubeconfig.
@@ -14,6 +16,7 @@ Target: Harvester v1.6+ (developed against v1.9), often air-gapped. The only thi
 - Nothing installed in the cluster for v1: no DaemonSet, no CRD, no image to mirror. Client-side only.
 - Single static binary, no CGO. Usable standalone and as a kubectl plugin (`kubectl-kvtop`).
 - Read-only. No VM actions (start, stop, migrate). Do not add them.
+- The virsh exec path is the only intrusive operation. It is disabled in the JSON CLI and MCP modes unless `--allow-exec` is passed.
 - No network access other than the Kubernetes API server from the kubeconfig.
 
 ## Stack
@@ -31,11 +34,17 @@ cmd/kvtop/            main, flags, kubeconfig loading
 internal/collect/     Collector interface + implementations (virt-handler, virsh, replay)
 internal/store/       ring buffers, rate computation, aggregation, overcommit
 internal/kube/        informers (VMI, VMIM, Node, Namespace), pod proxy, exec streaming
+internal/query/       shared read API over the store: top, vm, nodes, summaries (planned)
+internal/diagnose/    deterministic findings with evidence (planned)
+internal/cli/         non-interactive subcommands, JSON output (planned)
+internal/mcp/         MCP server over stdio, thin wrapper over query and diagnose (planned)
 internal/ui/          bubbletea models: header, cpu, nodes, mem, net, table, detail, help
 internal/ui/chart/    custom 2D braille graph and sparkline rendering
 ```
 
 Data flow: collectors push raw counter samples into the store on a tick; the store computes rates from deltas and keeps history; the UI reads snapshots from the store. The UI never talks to the cluster directly.
+
+Target state: every frontend (TUI, CLI, MCP) reads through `internal/query`. No frontend talks to the cluster or the store directly, and no logic lives in only one frontend. Moving the existing TUI onto `internal/query` is part of milestone 7 and must not change its behaviour.
 
 ### Collectors
 
@@ -51,7 +60,7 @@ type Collector interface {
 1. **virt-handler** (primary, VM metrics). For each `virt-handler` pod in `harvester-system`, GET `/metrics` through the API server pod proxy, in parallel, every 2s by default. Parse `kubevirt_vmi_*` series. One request per node, never one per VM.
 2. **metrics-server** (node bars). `metrics.k8s.io` NodeMetrics, polled every 15s. It is stale by design; do not poll faster.
 3. **virsh stream** (detail view only). One long-lived exec into the selected VM's `virt-launcher` pod, `compute` container, running a 1s loop of `virsh domstats`, parsed from the stream. Opened when the detail view opens, closed when it closes. Never one exec per poll, never for more than one VM at a time.
-4. **prometheus** (optional, later). Only to backfill history when the addon is enabled.
+4. **prometheus** (not built yet; optional for the TUI, important for agents). Used when the addon is enabled, to backfill history and answer questions about time ranges older than the in-memory buffer.
 
 ### Informers
 
@@ -120,6 +129,65 @@ Key each series by `namespace` + `name`; take `node` from the label or from the 
 
 A namespace filter also rescopes the cpu, mem and net graphs. Node bars always stay cluster-wide.
 
+## Agent interface
+
+The same data, for an AI agent instead of a human. Built on `internal/query` and `internal/diagnose`; the CLI comes first, MCP wraps it.
+
+### Commands
+
+```
+kvtop top      --sort cpu|mem|net|disk [--ns ...] [--node ...] [-n 10] [--window 15s] -o json
+kvtop vm       <namespace>/<name> [--window 15s] -o json
+kvtop nodes    [--window 15s] -o json
+kvtop diagnose [<namespace>/<name> | --ns ... | --node ...] [--window 30s] -o json
+kvtop record   --out <dir> [--duration 10m] [--anonymize]
+kvtop mcp      (stdio; exposes top, vm, nodes, diagnose as tools)
+```
+
+- Rates need at least two distinct samples, and virt-handler caches domain stats for about 5s (see spike results). One-shot commands therefore block for `--window` (default 15s, minimum 10s) and say so in the output. A rate computed from a zero delta inside one cache window is not a sample.
+- `kvtop mcp` is long-lived and keeps the ring buffers warm, so its tools answer immediately and can report trends over the buffer length.
+- All commands also accept `--replay <dir>` to run against a recording.
+- `-o json` is the contract. `-o table` is a convenience for humans.
+
+### Output rules
+
+- Stable, versioned schema (`"schema": "kvtop/v1"`). Changing a field name or unit is a breaking change.
+- Units in the field name: `cpu_cores_used`, `mem_guest_used_bytes`, `net_rx_bytes_per_s`, `disk_latency_ms`.
+- Every response carries `collected_at`, `window_seconds`, and the data source per metric (`virt-handler`, `metrics-server`, `prometheus`, `virsh`).
+- Missing data is `null` with a sibling `*_reason` field (for example `"no balloon stats"`). Never emit zero for unknown.
+- Stale data is flagged with its age, not dropped.
+- Default to summaries over the window: `min`, `avg`, `max`, `p95`, `last`. Raw samples only with `--samples`.
+- Every list is capped (`-n`, default 10) and reports `total` and `truncated`.
+- Errors are JSON on stdout with a non-zero exit code, not prose on stderr only.
+
+### Context joined to each VM
+
+From the informers, so the agent can explain a number without a second tool call: vCPUs, memory, instance type and preference, dedicated CPU placement, node, volumes with storage class, run strategy, phase and conditions, active or recent migrations, recent warning events.
+
+### Findings (`kvtop diagnose`)
+
+Computed deterministically in Go. The agent interprets findings; it does not do the arithmetic. Each finding has: `id`, `severity` (info, warning, critical), `subject` (VM or node), `summary` (one sentence), `evidence` (the values and thresholds used), `window_seconds`.
+
+Initial rule set:
+
+| id | Condition |
+| --- | --- |
+| `cpu_saturated` | cores used / vCPUs allotted above 0.9 for most of the window |
+| `mem_guest_pressure` | guest-used above 0.9 of guest memory, from balloon stats |
+| `disk_latency_high` | I/O time delta / ops delta above threshold, per disk |
+| `migration_not_converging` | dirty rate above transfer rate over the window |
+| `node_imbalance` | one node's VM CPU or memory far above the cluster median; lists top contributors |
+| `node_overcommit` | sum of VM memory over node allocatable above threshold |
+| `metrics_missing` | VM running but no balloon stats, or virt-handler scrape failing for its node |
+
+Thresholds are constants in one file, overridable by flags. Each rule has table-driven tests against fixtures. If a rule cannot be evaluated because data is missing, emit nothing for it rather than a guess; `metrics_missing` covers the gap.
+
+Do not add rules that need host-side data (CPU steal, PSI, host NIC saturation). They are out of reach without a node agent.
+
+### Recording
+
+`kvtop record` extends the existing fixture capture (`make record`) into a user-facing subcommand: it writes raw scrapes plus informer snapshots to a directory that `--replay` can read. `--anonymize` replaces namespace, VM, node and volume names with stable pseudonyms (same input maps to the same output within one recording) and drops labels and annotations.
+
 ## Milestones
 
 1. **Spike** [Completed]: fetch and parse virt-handler `/metrics` through the API proxy, print a sorted plain-text table to stdout. Validated on Harvester v1.36.3+rke2r1.
@@ -128,9 +196,13 @@ A namespace filter also rescopes the cpu, mem and net graphs. Node bars always s
 4. **Charts** [Completed]: braille history and sparklines.
 5. **Informers** [Completed]: instant state changes, migrations indicator.
 6. **Detail view** [Completed]: virsh stream, per-vCPU, per-disk, per-NIC, RSS.
-7. **Backlog / Future**: Prometheus backfill, Longhorn panel, alerts panel, namespace multi-select picker (`N`), tree mode (`t`).
+7. **Agent CLI** [Completed]: `internal/query`, then `top`, `vm`, `nodes` with JSON output and the output rules above. Refactor the TUI to read through `internal/query` with no behaviour change.
+8. **Diagnose** [Completed]: `internal/diagnose`, the initial rule set, `kvtop diagnose`.
+9. **MCP and record**: `kvtop mcp`, `kvtop record`, `--anonymize`.
+10. **Prometheus backend**: history backfill and time-range queries.
+11. **Backlog / Future**: Longhorn panel, alerts panel, namespace multi-select picker (`N`), tree mode (`t`).
 
-Milestones 1–6 shipped in **Release `v0.1.0`**.
+Milestones 1–6 shipped in **Release `v0.1.0`**. Stop after each remaining milestone and report before starting the next.
 
 ## Validated spike results
 
@@ -155,4 +227,4 @@ Empirical results from testing on a live Harvester cluster:
 
 ## Out of scope
 
-VM actions, multi-cluster, host agent, guest-internal process lists, alert management, any web UI.
+VM actions, multi-cluster, host agent, guest-internal process lists, alert management, any web UI, any LLM call from inside kvtop (it serves agents, it does not embed one).

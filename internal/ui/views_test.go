@@ -7,6 +7,7 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+	"github.com/coulof/kvtop/internal/query"
 	"github.com/coulof/kvtop/internal/store"
 	"github.com/coulof/kvtop/internal/ui"
 )
@@ -16,7 +17,8 @@ func TestViews_Rendering(t *testing.T) {
 	st.SetNodeAllocatable("hv-01", 64*1024*1024*1024)
 	st.SetNodeAllocatable("hv-02", 64*1024*1024*1024)
 
-	app := ui.NewAppModel(st, "test-cluster", "v1.36.3", 2*time.Second)
+	engine := query.NewEngine(st, nil, "")
+	app := ui.NewAppModel(engine, "test-cluster", "v1.36.3", 2*time.Second)
 
 	// Simulate window resize wide (120 cols)
 	modelWide, _ := app.Update(tea.WindowSizeMsg{Width: 120, Height: 30})
