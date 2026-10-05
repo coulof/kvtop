@@ -116,7 +116,44 @@ Run against recorded fixtures to test or demo without cluster access:
 
 ---
 
-## 6. Related Documentation
+## 6. Non-Interactive CLI & Subcommands
+
+In addition to the interactive TUI, `kvtop` runs non-interactively for shell scripts, cron jobs, and CI/CD pipelines:
+
+```bash
+# Query top VMs (supports -o json and -o table)
+kvtop top --sort cpu -n 10 -o table
+
+# Inspect a single VM with attached context
+kvtop vm default/coriolis-win-minion -o json
+
+# Inspect physical nodes and memory overcommit
+kvtop nodes -o table
+
+# Run deterministic health checks
+kvtop diagnose -o table
+
+# Suppress stderr sampling progress with -q / --quiet
+kvtop top -o json -q | jq .
+
+# Record cluster metrics to directory for offline replay
+kvtop record --out ./fixtures --anonymize
+
+# Start stdio Model Context Protocol (MCP) server
+kvtop mcp
+
+# Generate operational SKILL.md runbook for AI agents
+kvtop skill --out .opencode/skills/kvtop/SKILL.md
+
+# Generate shell autocompletion (bash, zsh, fish)
+source <(kvtop completion bash)
+source <(kvtop completion zsh)
+kvtop completion fish | source
+```
+
+---
+
+## 7. Related Documentation
 
 - [Architecture & Internal Design](architecture.md): Two-frontend single-core architecture, query engine, and JSON contract.
 - [MCP Prompt Guide](mcp-prompts.md): Catalog of troubleshooting questions for AI agents.

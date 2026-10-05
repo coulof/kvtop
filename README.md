@@ -127,9 +127,61 @@ kvtop nodes -o table
 kvtop diagnose -o json
 kvtop diagnose --ns default -o table
 
+# Run silently without stderr sampling progress (ideal for pipelines or subshells)
+kvtop top -o json -q | jq .
+kvtop diagnose -o json --quiet
+
 # Record live cluster metrics for offline replay and sanitization
 kvtop record --out ./fixtures --duration 10m --anonymize
+
+# Generate an operational SKILL.md runbook for AI coding agents
+kvtop skill
+kvtop skill --out .opencode/skills/kvtop/SKILL.md
+
+# Generate shell completion script (bash, zsh, fish)
+source <(kvtop completion bash)
+source <(kvtop completion zsh)
+kvtop completion fish | source
 ```
+
+---
+
+## Shell Completion
+
+Generate shell autocompletion for subcommands, flags, and cluster resources:
+
+```bash
+# Bash (add to ~/.bashrc)
+source <(kvtop completion bash)
+
+# Zsh (add to ~/.zshrc)
+source <(kvtop completion zsh)
+
+# Fish (add to ~/.config/fish/config.fish)
+kvtop completion fish | source
+```
+
+---
+
+## AI Agent Skill (CLI Alternative to MCP)
+
+If you prefer not to run background MCP servers or want to save context window tokens, generate a `SKILL.md` runbook directly from `kvtop`:
+
+```bash
+# Print skill to stdout
+kvtop skill
+
+# Install into OpenCode skills directory
+kvtop skill --out .opencode/skills/kvtop/SKILL.md
+
+# Install into Claude Code skills directory
+kvtop skill --out .claude/skills/kvtop/SKILL.md
+```
+
+The generated skill teaches CLI agents:
+- How to invoke subcommands silently with `-o json -q`
+- How to interpret `null` metrics with reasons and `stale` flags
+- Playbooks for noisy neighbor hunting, single VM triage, host overcommit, and stalled live migrations
 
 ---
 

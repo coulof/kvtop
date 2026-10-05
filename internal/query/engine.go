@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/coulof/kvtop/internal/collect"
@@ -20,9 +21,11 @@ type SnapshotProvider interface {
 
 // Engine implements the shared read and query API over the store and Kubernetes informers.
 type Engine struct {
-	store     *store.Store
-	kClient   *kube.Client
-	replayDir string
+	store      *store.Store
+	kClient    *kube.Client
+	replayDir  string
+	mu         sync.RWMutex
+	clusterErr error
 }
 
 // NewEngine creates a new query engine.
@@ -32,6 +35,20 @@ func NewEngine(st *store.Store, kClient *kube.Client, replayDir string) *Engine 
 		kClient:   kClient,
 		replayDir: replayDir,
 	}
+}
+
+// SetClusterError records an asynchronous cluster connection error.
+func (e *Engine) SetClusterError(err error) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	e.clusterErr = err
+}
+
+// ClusterError returns the latest cluster connection error if any.
+func (e *Engine) ClusterError() error {
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	return e.clusterErr
 }
 
 // Snapshot delegates to store.Snapshot for real-time TUI views.
@@ -103,6 +120,11 @@ func (e *Engine) QueryTop(ctx context.Context, opts TopOptions) (*TopResult, err
 	cutoff := now.Add(-opts.Window)
 
 	vms := e.store.GetAllVMs()
+	if len(vms) == 0 {
+		if cErr := e.ClusterError(); cErr != nil {
+			return nil, fmt.Errorf("cluster connection error: %w", cErr)
+		}
+	}
 	allPoints := e.store.GetAllVMHistoryPoints()
 
 	nsFilterMap := make(map[string]bool)
@@ -163,6 +185,9 @@ func (e *Engine) QueryVM(ctx context.Context, namespace, name string, opts VMOpt
 
 	vm, exists := e.store.GetVM(namespace, name)
 	if !exists {
+		if cErr := e.ClusterError(); cErr != nil {
+			return nil, fmt.Errorf("cluster connection error: %w", cErr)
+		}
 		return nil, fmt.Errorf("%w: %s/%s", ErrVMNotFound, namespace, name)
 	}
 
@@ -188,6 +213,11 @@ func (e *Engine) QueryNodes(ctx context.Context, opts NodesOptions) (*NodesResul
 
 	now := time.Now()
 	snap := e.store.Snapshot("")
+	if len(snap.Nodes) == 0 {
+		if cErr := e.ClusterError(); cErr != nil {
+			return nil, fmt.Errorf("cluster connection error: %w", cErr)
+		}
+	}
 
 	var items []NodeItem
 	for _, n := range snap.Nodes {

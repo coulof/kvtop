@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"time"
 
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/kubernetes"
@@ -33,6 +34,7 @@ func NewClient(kubeconfigPath string) (*Client, error) {
 	// Optimize client for parallel metric scraping across nodes
 	config.QPS = 50.0
 	config.Burst = 100
+	config.Timeout = 5 * time.Second
 
 	cs, err := kubernetes.NewForConfig(config)
 	if err != nil {

@@ -332,6 +332,130 @@ func TestCLIRecordAndReplay(t *testing.T) {
 	}
 }
 
+func TestCLISkillStdout(t *testing.T) {
+	stdout := &bytes.Buffer{}
+	stderr := &bytes.Buffer{}
+
+	exitCode := cli.Run(context.Background(), []string{"skill"}, stdout, stderr)
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+
+	content := stdout.String()
+	if !strings.Contains(content, "name: kvtop") {
+		t.Errorf("expected skill frontmatter name: kvtop, got:\n%s", content)
+	}
+	if !strings.Contains(content, "Playbook A: Find Noisy Neighbors") {
+		t.Errorf("expected troubleshooting playbooks in skill, got:\n%s", content)
+	}
+}
+
+func TestCLISkillFileOutput(t *testing.T) {
+	tempOut, err := os.MkdirTemp("", "kvtop-skill-test-*")
+	if err != nil {
+		t.Fatalf("failed creating temp dir: %v", err)
+	}
+	defer os.RemoveAll(tempOut)
+
+	outFile := filepath.Join(tempOut, "skills", "kvtop", "SKILL.md")
+	stdout := &bytes.Buffer{}
+	stderr := &bytes.Buffer{}
+
+	exitCode := cli.Run(context.Background(), []string{"skill", "--out", outFile}, stdout, stderr)
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d, stderr: %s", exitCode, stderr.String())
+	}
+
+	data, err := os.ReadFile(outFile)
+	if err != nil {
+		t.Fatalf("failed reading written skill file: %v", err)
+	}
+	if !strings.Contains(string(data), "name: kvtop") {
+		t.Errorf("expected skill content in written file")
+	}
+}
+
+func TestCLICompletion_Bash(t *testing.T) {
+	stdout := &bytes.Buffer{}
+	stderr := &bytes.Buffer{}
+
+	exitCode := cli.Run(context.Background(), []string{"completion", "bash"}, stdout, stderr)
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+
+	out := stdout.String()
+	if !strings.Contains(out, "complete -F _kvtop kvtop") {
+		t.Errorf("expected bash completion function, got:\n%s", out)
+	}
+}
+
+func TestCLICompletion_Zsh(t *testing.T) {
+	stdout := &bytes.Buffer{}
+	stderr := &bytes.Buffer{}
+
+	exitCode := cli.Run(context.Background(), []string{"completion", "zsh"}, stdout, stderr)
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+
+	out := stdout.String()
+	if !strings.Contains(out, "compdef _kvtop kvtop") {
+		t.Errorf("expected zsh completion function, got:\n%s", out)
+	}
+}
+
+func TestCLICompletion_Fish(t *testing.T) {
+	stdout := &bytes.Buffer{}
+	stderr := &bytes.Buffer{}
+
+	exitCode := cli.Run(context.Background(), []string{"completion", "fish"}, stdout, stderr)
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+
+	out := stdout.String()
+	if !strings.Contains(out, "complete -c kvtop") {
+		t.Errorf("expected fish completion command, got:\n%s", out)
+	}
+}
+
+func TestCLICompletion_Invalid(t *testing.T) {
+	stdout := &bytes.Buffer{}
+	stderr := &bytes.Buffer{}
+
+	exitCode := cli.Run(context.Background(), []string{"completion", "powershell"}, stdout, stderr)
+	if exitCode == 0 {
+		t.Fatalf("expected non-zero exit code for unsupported shell")
+	}
+
+	var errResp cli.ErrorResponse
+	if err := json.Unmarshal(stdout.Bytes(), &errResp); err != nil {
+		t.Fatalf("expected JSON error on stdout: %v", err)
+	}
+	if !strings.Contains(errResp.Error, "unsupported shell") {
+		t.Errorf("expected unsupported shell message, got: %s", errResp.Error)
+	}
+}
+
+func TestCLICompletion_MissingArgs(t *testing.T) {
+	stdout := &bytes.Buffer{}
+	stderr := &bytes.Buffer{}
+
+	exitCode := cli.Run(context.Background(), []string{"completion"}, stdout, stderr)
+	if exitCode == 0 {
+		t.Fatalf("expected non-zero exit code for missing shell argument")
+	}
+
+	var errResp cli.ErrorResponse
+	if err := json.Unmarshal(stdout.Bytes(), &errResp); err != nil {
+		t.Fatalf("expected JSON error on stdout: %v", err)
+	}
+	if !strings.Contains(errResp.Error, "shell argument required") {
+		t.Errorf("expected missing shell arg message, got: %s", errResp.Error)
+	}
+}
+
 func TestCLIUnknownCommand(t *testing.T) {
 	stdout := &bytes.Buffer{}
 	stderr := &bytes.Buffer{}

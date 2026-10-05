@@ -18,15 +18,19 @@ Usage:
   kvtop diagnose [flags]                       Run deterministic health diagnosis (saturation, latency, imbalance)
   kvtop record --out <dir> [flags]             Record cluster metrics to directory for --replay
   kvtop mcp [flags]                            Start Model Context Protocol (MCP) stdio server
+  kvtop skill [--out <path>]                   Generate an AI agent skill / runbook
+  kvtop completion <bash|zsh|fish>             Generate shell completion script
   kvtop help [command]                         Show this help message
 
 Commands:
-  top        List top VMs sorted by metric (--sort cpu|mem|net|disk)
-  vm         Detailed breakdown of a single VM with attached informer context
-  nodes      Physical cluster host overview with allocatable capacity and overcommit
-  diagnose   Deterministic rule-based anomaly detection on VMs and nodes
-  record     Capture live cluster scrapes and informers for offline replay
-  mcp        Expose top, vm, nodes, and diagnose as tools via MCP stdio protocol
+  top          List top VMs sorted by metric (--sort cpu|mem|net|disk)
+  vm           Detailed breakdown of a single VM with attached informer context
+  nodes        Physical cluster host overview with allocatable capacity and overcommit
+  diagnose     Deterministic rule-based anomaly detection on VMs and nodes
+  record       Capture live cluster scrapes and informers for offline replay
+  mcp          Expose top, vm, nodes, and diagnose as tools via MCP stdio protocol
+  skill        Generate an operational SKILL.md runbook for AI agents
+  completion   Generate shell completion script for bash, zsh, or fish
 
 Common Flags:
   --window <duration>     Metrics sampling window (default: 15s for top/vm/nodes, 30s for diagnose, min: 10s)
@@ -63,6 +67,10 @@ func Run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 		return RunRecord(ctx, subArgs, stdout, stderr)
 	case "mcp":
 		return RunMCP(ctx, subArgs, stdout, stderr)
+	case "skill":
+		return RunSkill(ctx, subArgs, stdout, stderr)
+	case "completion":
+		return RunCompletion(ctx, subArgs, stdout, stderr)
 	case "help", "-h", "--help":
 		PrintUsage(stdout)
 		return 0
